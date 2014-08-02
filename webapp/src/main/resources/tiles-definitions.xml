@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC  
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+ <definition name="base.definition"
+      template="/WEB-INF/view/templates/template.jsp">
+        <put-attribute name="title"     value="Home" />
+        <put-attribute name="header"     value="/WEB-INF/view/templates/header.jsp" />
+        <put-attribute name="body"         value="" />
+        <put-attribute name="footer"     value="/WEB-INF/view/templates/footer.jsp" />
+        
+        <put-list-attribute name="jsFiles">
+		    <add-attribute value="/resources/js/shared/jquery-1.11.1.min.js" />
+		    <add-attribute value="/resources/js/shared/jquery-ui.min.js" />
+		   	<add-attribute value="/resources/js/shared/jquery.mask.min.js" />
+		   	<add-attribute value="/resources/js/shared/jquery.dataTables.min.js" />
+		    <add-attribute value="/resources/js/app/main.js" />
+		    <add-attribute value="/resources/js/app/ajax.js" />
+		    <add-attribute value="/resources/js/app/dialog.js" />
+		   	<add-attribute value="/resources/js/app/datatable.js" />
+		  </put-list-attribute>
+		  
+		  <put-list-attribute name="cssFiles">
+		  	<add-attribute value="/resources/css/shared/reset-min.css" />
+		  	<add-attribute value="/resources/css/shared/jquery-ui.min.css" />
+		  	<add-attribute value="/resources/css/shared/jquery-ui.theme.min.css" />
+		  	<add-attribute value="/resources/css/shared/jquery.dataTables.min.css" />
+		    <add-attribute value="/resources/css/app/main.css" />
+		  </put-list-attribute>
+  
+    </definition>
+    
+    <definition name="aluno.editar" extends="base.definition">
+        <put-attribute name="title"     value="Aluno" />
+        <put-attribute name="body"         value="/WEB-INF/view/aluno/editar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/aluno/editar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+        <definition name="aluno.consultar" extends="base.definition">
+        <put-attribute name="title"     value="Aluno" />
+        <put-attribute name="body"         value="/WEB-INF/view/aluno/consultar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/aluno/consultar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+    <definition name="professor.editar" extends="base.definition">
+        <put-attribute name="title"     value="Professor" />
+        <put-attribute name="body"         value="/WEB-INF/view/professor/editar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/professor/editar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+        <definition name="professor.consultar" extends="base.definition">
+        <put-attribute name="title"     value="Professor" />
+        <put-attribute name="body"         value="/WEB-INF/view/professor/consultar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/professor/consultar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+    <definition name="colegio.editar" extends="base.definition">
+        <put-attribute name="title"     value="Colegio" />
+        <put-attribute name="body"         value="/WEB-INF/view/colegio/editar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/colegio/editar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+        <definition name="colegio.consultar" extends="base.definition">
+        <put-attribute name="title"     value="Colegio" />
+        <put-attribute name="body"         value="/WEB-INF/view/colegio/consultar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/colegio/consultar.js" />
+		  </put-list-attribute>
+    </definition>
+
+</tiles-definitions>
+	
