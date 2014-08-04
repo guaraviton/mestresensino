@@ -1,5 +1,7 @@
 package br.com.mestres.ensino.webapp.spring.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,7 @@ public class AlunoController {
     public DataTableWrapperDTO get(@RequestParam(required=false, defaultValue="") String nome, @RequestParam(required=false) Integer idColegio) {
         return new DataTableWrapperDTO(alunoService.get(nome, idColegio));
     }
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody

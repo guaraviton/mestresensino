@@ -11,4 +11,5 @@ public interface AlunoDAO {
 	List<Aluno> get(String nome, Integer idColegio);
 
 	Aluno get(Integer id);
+
 }

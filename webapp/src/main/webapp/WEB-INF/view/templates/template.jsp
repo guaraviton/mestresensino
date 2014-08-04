@@ -18,6 +18,7 @@
 		<c:forEach var="cssFile" items="${cssFiles}">
 		  <link rel="stylesheet" href="<c:url value='${cssFile}'/>"/>
 		</c:forEach>
+		
 	</head>
 	<body>
 		<table border="1" cellspacing="2" align="center">

@@ -15,6 +15,8 @@
 		    <add-attribute value="/resources/js/shared/jquery-ui.min.js" />
 		   	<add-attribute value="/resources/js/shared/jquery.mask.min.js" />
 		   	<add-attribute value="/resources/js/shared/jquery.dataTables.min.js" />
+		   	<add-attribute value="/resources/js/shared/chosen.jquery.min.js" />
+		   	<add-attribute value="/resources/js/shared/ajax-chosen.min.js" />
 		    <add-attribute value="/resources/js/app/main.js" />
 		    <add-attribute value="/resources/js/app/ajax.js" />
 		    <add-attribute value="/resources/js/app/dialog.js" />
@@ -26,6 +28,7 @@
 		  	<add-attribute value="/resources/css/shared/jquery-ui.min.css" />
 		  	<add-attribute value="/resources/css/shared/jquery-ui.theme.min.css" />
 		  	<add-attribute value="/resources/css/shared/jquery.dataTables.min.css" />
+		  	<add-attribute value="/resources/css/shared/chosen.min.css" />
 		    <add-attribute value="/resources/css/app/main.css" />
 		  </put-list-attribute>
   
@@ -71,11 +74,27 @@
 		  </put-list-attribute>
     </definition>
     
-        <definition name="colegio.consultar" extends="base.definition">
+	<definition name="colegio.consultar" extends="base.definition">
         <put-attribute name="title"     value="Colegio" />
         <put-attribute name="body"         value="/WEB-INF/view/colegio/consultar.jsp" />
          <put-list-attribute name="jsFiles" inherit="true">
 		    <add-attribute value="/resources/js/app/colegio/consultar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+    <definition name="aula.consultar" extends="base.definition">
+        <put-attribute name="title"     value="Aula" />
+        <put-attribute name="body"         value="/WEB-INF/view/aula/consultar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/aula/consultar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+    <definition name="aula.editar" extends="base.definition">
+        <put-attribute name="title"     value="Aula" />
+        <put-attribute name="body"         value="/WEB-INF/view/aula/editar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/aula/editar.js" />
 		  </put-list-attribute>
     </definition>
 
