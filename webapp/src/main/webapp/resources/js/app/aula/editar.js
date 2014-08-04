@@ -1,5 +1,5 @@
 $(function() {
-	$("#jacComplete").ajaxChosen({
+	/*$("#idAlunos").ajaxChosen({
 		type : 'GET',
 		url : '/webapp/api/aluno',
 		dataType : 'json',
@@ -20,10 +20,33 @@ $(function() {
 	{
 		placeholder_text: 'Selecione os alunos para a aula',
 		no_results_text: 'Aluno inexistente',
-		width: "95%"
+		width: "100%"
 	}).change(function() {
 		// you can see the IDs in console off all items in autocomplete and
 		// deal with them
-		console.log($("#jacComplete").val());
+		console.log($("#idAlunos").val());
+	});	*/
+	
+	$("#idAlunos").chosen({
+		placeholder_text: 'Selecione os alunos para a aula',
+		no_results_text: 'Aluno inexistente',
+		width: "100%"
+	}).change(function() {
+		// you can see the IDs in console off all items in autocomplete and
+		// deal with them
+		console.log($("#idAlunos").val());
 	});
+	
+	
+	$( "button").button();
+
+	$("#buttonSalvar").click(function( event ) {
+		salvar();
+    	event.preventDefault();
+    });
+	
+	$("#buttonVoltar").click(function( event ) {
+		location.href = "index.html";
+    	event.preventDefault();
+    });
 });

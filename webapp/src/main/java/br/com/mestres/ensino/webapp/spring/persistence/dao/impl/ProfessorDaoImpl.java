@@ -36,4 +36,9 @@ public class ProfessorDaoImpl extends DAOTemplate implements ProfessorDAO{
 		return template.get(Professor.class, id);
 	}
 
+	@Override
+	public List<Professor> get() {
+		return (List<Professor>) template.find("from Professor");
+	}
+
 }

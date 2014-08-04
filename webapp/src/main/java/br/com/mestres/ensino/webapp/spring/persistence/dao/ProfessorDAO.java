@@ -11,4 +11,6 @@ public interface ProfessorDAO {
 	List<Professor> get(String nome);
 
 	Professor get(Integer id);
+
+	List<Professor> get();
 }

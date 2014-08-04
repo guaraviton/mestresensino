@@ -10,22 +10,35 @@
 		<div class="formspacer">
 			<div class="bloco">
 				<label for="nome"><spring:message code="label.professor" /></label> 
-				<input type="text" class="text big " id="nome" name="nome" value="${colegio.nome}" tabindex="1" maxlength="255">
+				<select id="idProfessor" name="idProfessor">
+					<option value=""><spring:message code="label.selecione" /></option>
+					<c:forEach items="${professores}" var="professor">
+			       		<option value="${professor.id}">${professor.nome}</option>
+			   		</c:forEach>
+				</select>
 			</div>
 		</div>
 		
 		<div class="formspacer">
 			<div class="bloco">
 				<label for="nome"><spring:message code="label.sala" /></label> 
-				<input type="text" class="text big " id="sala" name="sala" value="${colegio.nome}" tabindex="1" maxlength="255">
+				<select id="idSala" name="idSala">
+					<option value=""><spring:message code="label.selecione" /></option>
+					<c:forEach items="${salas}" var="sala">
+			       		<option value="${sala.id}">${sala.numero}</option>
+			   		</c:forEach>
+				</select>
 			</div>
 		</div>
 		
 		<div class="formspacer"  style="overflow: initial;">
 			<div class="bloco">
-					<label for="endereco"><spring:message code="label.alunos" /></label> 
-					<select id="jacComplete" title="List of Movies" size=30 multiple style="width: 484px; display: block; height: 100%;">
-					</select>
+				<label for="idAlunos"><spring:message code="label.alunos" /></label> 
+				<select id="idAlunos" multiple style="width: 506px;">
+					<c:forEach items="${alunos}" var="aluno">
+			       		<option value="${aluno.id}">${aluno.nome}</option>
+			   		</c:forEach>
+				</select>
 			</div>
 		</div>
 		

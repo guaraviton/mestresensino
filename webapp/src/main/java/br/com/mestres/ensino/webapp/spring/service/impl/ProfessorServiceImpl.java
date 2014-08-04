@@ -32,4 +32,10 @@ public class ProfessorServiceImpl implements ProfessorService{
 		return dao.get(id);
 	}
 
+
+	@Override
+	public List<Professor> get() {
+		return dao.get();
+	}
+
 }

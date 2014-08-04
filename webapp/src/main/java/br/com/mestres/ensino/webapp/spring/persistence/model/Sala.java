@@ -2,13 +2,15 @@ package br.com.mestres.ensino.webapp.spring.persistence.model;
 
 // Generated 01/08/2014 01:15:09 by Hibernate Tools 4.0.0
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
-import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
-import br.com.mestres.ensino.webapp.spring.service.ColegioService;
-import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
+import br.com.mestres.ensino.webapp.spring.service.AlunoService;
+import br.com.mestres.ensino.webapp.spring.service.ProfessorService;
+import br.com.mestres.ensino.webapp.spring.service.SalaService;
 import br.com.mestres.ensino.webapp.spring.view.form.ColegioForm;
 
 @Controller
@@ -23,10 +23,19 @@ import br.com.mestres.ensino.webapp.spring.view.form.ColegioForm;
 public class AulaController {
 
 	@Autowired
-	ColegioService colegioService;
+	ProfessorService professorService;
+	
+	@Autowired
+	SalaService salaService;
+	
+	@Autowired
+	AlunoService alunoService;
 	
 	@RequestMapping(value="/editar.html",method = RequestMethod.GET)
     public String editar(Model model) {
+		model.addAttribute("professores", professorService.get());
+		model.addAttribute("salas", salaService.get());
+		model.addAttribute("alunos", alunoService.get(null, null));
         return "aula.editar";
     }
 	
@@ -37,23 +46,18 @@ public class AulaController {
 	
 	@RequestMapping(value="/{idColegio}", method = RequestMethod.GET)
     public String get(@PathVariable Integer idColegio, Model model) {
-		Colegio colegio = colegioService.get(idColegio);
-		model.addAttribute(colegio);
         return "aula.editar";
     }
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
     public DataTableWrapperDTO get(@RequestParam(required=false, defaultValue="") String nome) {
-        return new DataTableWrapperDTO(colegioService.get(nome));
+        return new DataTableWrapperDTO(null);
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
     public Integer salvar(@Valid @RequestBody ColegioForm form) {
-		Colegio colegio = new Colegio();
-		AppBeanProperties.copyProperties(colegio, form);
-		colegioService.salvar(colegio);
-		return colegio.getId();
+		return null;
     }
 }
