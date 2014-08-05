@@ -29,13 +29,32 @@ $(function() {
 	
 	$("#idAlunos").chosen({
 		placeholder_text: 'Selecione os alunos para a aula',
-		no_results_text: 'Aluno inexistente',
-		width: "100%"
+		no_results_text: 'Aluno inexistente'
 	}).change(function() {
 		// you can see the IDs in console off all items in autocomplete and
 		// deal with them
 		console.log($("#idAlunos").val());
 	});
+	
+	$("#idProfessor").chosen({
+		no_results_text: 'Professor inexistente'
+	}).change(function() {
+		// you can see the IDs in console off all items in autocomplete and
+		// deal with them
+		console.log($("#idProfessor").val());
+	});
+	
+	$("#idSala").chosen({
+		no_results_text: 'Sala inexistente'
+	}).change(function() {
+		// you can see the IDs in console off all items in autocomplete and
+		// deal with them
+		console.log($("#idSala").val());
+	});
+	
+	$("#dataInicio").datepicker({dateFormat: 'dd/mm/yy'});
+	
+	$("#dataFim").datepicker({dateFormat: 'dd/mm/yy'});
 	
 	
 	$( "button").button();

@@ -31,14 +31,28 @@
 			</div>
 		</div>
 		
-		<div class="formspacer"  style="overflow: initial;">
+		<div class="formspacer">
 			<div class="bloco">
 				<label for="idAlunos"><spring:message code="label.alunos" /></label> 
-				<select id="idAlunos" multiple style="width: 506px;">
+				<select id="idAlunos" multiple>
 					<c:forEach items="${alunos}" var="aluno">
 			       		<option value="${aluno.id}">${aluno.nome}</option>
 			   		</c:forEach>
 				</select>
+			</div>
+		</div>
+		
+		<div class="formspacer">
+			<div class="bloco">
+				<label for="dataInicio"><spring:message code="label.data.inicio" /></label> 
+				<input type="text" id="dataInicio">
+			</div>
+		</div>
+		
+		<div class="formspacer">
+			<div class="bloco">
+				<label for="dataFim"><spring:message code="label.data.fim" /></label> 
+				<input type="text" id="dataFim">
 			</div>
 		</div>
 		

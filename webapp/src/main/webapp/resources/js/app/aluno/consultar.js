@@ -12,6 +12,14 @@ $(function() {
 		event.preventDefault();
     });
 	
+	$("#idColegio").chosen({
+		no_results_text: 'Colegio inexistente'
+	}).change(function() {
+		// you can see the IDs in console off all items in autocomplete and
+		// deal with them
+		console.log($("#idColegio").val());
+	});
+	
 });
 
 var consultar = function() {

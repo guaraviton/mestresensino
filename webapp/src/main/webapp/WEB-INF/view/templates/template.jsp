@@ -28,7 +28,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="400">
+				<td width="1024">
 					<tiles:insertAttribute name="body" />        
 				</td>
 			</tr>
