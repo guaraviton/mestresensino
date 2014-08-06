@@ -31,7 +31,7 @@ var consultar = function() {
 	var columns = [
 	               { "data": "nome" },
 	               { "data": "telefone" },
-	               { "data": "colegio.nome" }
+	               { "data": "colegio.nome", "defaultContent" : ""}
 	];
 	
 	var columnDefs = [{

@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.mestres.ensino.webapp.spring.persistence.dao.ColegioDAO;
+import br.com.mestres.ensino.webapp.spring.persistence.dao.CrudDAO;
+import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
 import br.com.mestres.ensino.webapp.spring.service.ColegioService;
+import br.com.mestres.ensino.webapp.spring.service.helper.CrudServiceImpl;
 
 @Service
-public class ColegioServiceImpl implements ColegioService{
+public class ColegioServiceImpl extends CrudServiceImpl<Colegio> implements ColegioService{
 
 	@Autowired
 	private ColegioDAO dao;
@@ -21,11 +24,6 @@ public class ColegioServiceImpl implements ColegioService{
 	}
 	
 	@Override
-	public void salvar(Colegio colegio) {
-		dao.salvar(colegio);
-	}
-	
-	@Override
 	public List<Colegio> get(String nome) {
 		return dao.get(nome);
 	}
@@ -33,6 +31,11 @@ public class ColegioServiceImpl implements ColegioService{
 	@Override
 	public Colegio get(Integer id) {
 		return dao.get(id);
+	}
+
+	@Override
+	public CrudDAO<Colegio> getDAO() {
+		return dao;
 	}
 
 }

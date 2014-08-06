@@ -97,6 +97,22 @@
 		    <add-attribute value="/resources/js/app/aula/editar.js" />
 		  </put-list-attribute>
     </definition>
+    
+        <definition name="sala.consultar" extends="base.definition">
+        <put-attribute name="title"     value="Sala" />
+        <put-attribute name="body"         value="/WEB-INF/view/sala/consultar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/sala/consultar.js" />
+		  </put-list-attribute>
+    </definition>
+    
+    <definition name="sala.editar" extends="base.definition">
+        <put-attribute name="title"     value="Sala" />
+        <put-attribute name="body"         value="/WEB-INF/view/sala/editar.jsp" />
+         <put-list-attribute name="jsFiles" inherit="true">
+		    <add-attribute value="/resources/js/app/sala/editar.js" />
+		  </put-list-attribute>
+    </definition>
 
 </tiles-definitions>
 	

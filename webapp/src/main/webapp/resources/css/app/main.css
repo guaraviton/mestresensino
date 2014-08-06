@@ -7,7 +7,6 @@
 }
 
 .tituloaplicacao {
-	margin-left: 30px;
 	font: 48px MuseoSans100, arial;
 	color: #2e6e9e;
 	letter-spacing: -2px;
@@ -16,7 +15,7 @@
 
 .buttonspacer {
 	position: relative;
-	margin: 40px 0 22px 0;
+	margin: 30px 0 30px 0;
 	text-align: center;
 	display: block;
 	float: left;
@@ -25,7 +24,7 @@
 
 .formspacer {
 	position: relative;
-	margin: 12px 0 12px 0;
+	margin: 8px 0 8px 0;
 	float: left;
 	width: 100%;
 	display: block;

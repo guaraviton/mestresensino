@@ -22,7 +22,7 @@
 		<div class="formspacer">
 			<div class="bloco">
 				<label for="nome"><spring:message code="label.sala" /></label> 
-				<select id="idSala" name="idSala">
+				<select id="idSala" name="idSala" style="width: 125px"> 
 					<option value=""><spring:message code="label.selecione" /></option>
 					<c:forEach items="${salas}" var="sala">
 			       		<option value="${sala.id}">${sala.numero}</option>
@@ -44,15 +44,15 @@
 		
 		<div class="formspacer">
 			<div class="bloco">
-				<label for="dataInicio"><spring:message code="label.data.inicio" /></label> 
-				<input type="text" id="dataInicio">
+				<label for="data"><spring:message code="label.data" /></label> 
+				<input type="text" id="data">
 			</div>
 		</div>
 		
 		<div class="formspacer">
 			<div class="bloco">
-				<label for="dataFim"><spring:message code="label.data.fim" /></label> 
-				<input type="text" id="dataFim">
+				<label for="data"><spring:message code="label.horas" /></label> 
+				<input type="text" id="horas" style="width: 35px"> 
 			</div>
 		</div>
 		

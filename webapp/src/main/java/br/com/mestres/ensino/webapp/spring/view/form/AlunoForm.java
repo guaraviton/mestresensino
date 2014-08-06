@@ -25,6 +25,7 @@ public class AlunoForm {
 	@Size(min=10,max=10)
 	private String dataNascimento;
 	
+	@NotEmpty
 	private String sexo;
 	
 	private String endereco;
@@ -35,6 +36,8 @@ public class AlunoForm {
 	private String telefone;
 	
 	private Integer idColegio;
+	
+	private String quantidadeHorasCompradas;
 	
 	
 	public String getNome() {
@@ -103,4 +106,11 @@ public class AlunoForm {
 	public void setIdColegio(Integer idColegio) {
 		this.idColegio = idColegio;
 	}
+	public String getQuantidadeHorasCompradas() {
+		return quantidadeHorasCompradas;
+	}
+	public void setQuantidadeHorasCompradas(String quantidadeHorasCompradas) {
+		this.quantidadeHorasCompradas = quantidadeHorasCompradas;
+	}
+
 }

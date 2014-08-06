@@ -1,6 +1,6 @@
 package br.com.mestres.ensino.webapp.spring.persistence.model;
 
-// Generated 01/08/2014 01:15:09 by Hibernate Tools 4.0.0
+// Generated 05/08/2014 23:00:01 by Hibernate Tools 4.0.0
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -40,12 +40,14 @@ public class Aluno implements java.io.Serializable {
 	
 	@JsonIgnore
 	private Set<AlunoAula> alunoAulas = new HashSet<AlunoAula>(0);
+	
+	@JsonIgnore
+	private Set<AlunoHora> alunoHoras = new HashSet<AlunoHora>(0);
 
 	public Aluno() {
 	}
 
-	public Aluno(Colegio colegio, String nome, String dataNascimento, String sexo) {
-		this.colegio = colegio;
+	public Aluno(String nome, String dataNascimento, String sexo) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.sexo = sexo;
@@ -53,7 +55,8 @@ public class Aluno implements java.io.Serializable {
 
 	public Aluno(Colegio colegio, String nome, String nomePai, String nomeMae,
 			String email, String dataNascimento, String sexo, String telefone,
-			String endereco, String cep, Set<AlunoAula> alunoAulas) {
+			String endereco, String cep, Set<AlunoAula> alunoAulas,
+			Set<AlunoHora> alunoHoras) {
 		this.colegio = colegio;
 		this.nome = nome;
 		this.nomePai = nomePai;
@@ -65,6 +68,7 @@ public class Aluno implements java.io.Serializable {
 		this.endereco = endereco;
 		this.cep = cep;
 		this.alunoAulas = alunoAulas;
+		this.alunoHoras = alunoHoras;
 	}
 
 	@Id
@@ -79,7 +83,7 @@ public class Aluno implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "colegio_id", nullable = true)
+	@JoinColumn(name = "colegio_id")
 	public Colegio getColegio() {
 		return this.colegio;
 	}
@@ -97,7 +101,7 @@ public class Aluno implements java.io.Serializable {
 		this.nome = nome;
 	}
 
-	@Column(name = "nomePai")
+	@Column(name = "nome_pai")
 	public String getNomePai() {
 		return this.nomePai;
 	}
@@ -106,7 +110,7 @@ public class Aluno implements java.io.Serializable {
 		this.nomePai = nomePai;
 	}
 
-	@Column(name = "nomeMae")
+	@Column(name = "nome_mae")
 	public String getNomeMae() {
 		return this.nomeMae;
 	}
@@ -124,7 +128,7 @@ public class Aluno implements java.io.Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "dataNascimento", nullable = false, length = 10)
+	@Column(name = "data_nascimento", nullable = false, length = 10)
 	public String getDataNascimento() {
 		return this.dataNascimento;
 	}
@@ -176,6 +180,15 @@ public class Aluno implements java.io.Serializable {
 
 	public void setAlunoAulas(Set<AlunoAula> alunoAulas) {
 		this.alunoAulas = alunoAulas;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aluno")
+	public Set<AlunoHora> getAlunoHoras() {
+		return this.alunoHoras;
+	}
+
+	public void setAlunoHoras(Set<AlunoHora> alunoHoras) {
+		this.alunoHoras = alunoHoras;
 	}
 
 }

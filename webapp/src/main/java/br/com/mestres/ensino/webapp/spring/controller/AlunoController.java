@@ -1,7 +1,5 @@
 package br.com.mestres.ensino.webapp.spring.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +47,7 @@ public class AlunoController {
 		Aluno aluno = alunoService.get(idAluno);
 		model.addAttribute(aluno);
 		model.addAttribute("colegios", colegioService.get());
+		model.addAttribute("quantidadeHorasDisponiveis", 1200);
         return "aluno.editar";
     }
 	
@@ -73,7 +72,9 @@ public class AlunoController {
 			aluno.setColegio(colegio);
 		}
 		
-		alunoService.salvar(aluno);
+		alunoService.salvar(aluno, form.getQuantidadeHorasCompradas());
+		
+		
 		return aluno.getId();
     }
 }

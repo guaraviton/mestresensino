@@ -1,6 +1,6 @@
 package br.com.mestres.ensino.webapp.spring.persistence.model;
 
-// Generated 01/08/2014 01:15:09 by Hibernate Tools 4.0.0
+// Generated 05/08/2014 23:00:01 by Hibernate Tools 4.0.0
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,18 +27,27 @@ public class Professor implements java.io.Serializable {
 
 	private Integer id;
 	private String nome;
+	private String email;
 	private String telefone;
 	private String endereco;
-	private String email;
-	
 	@JsonIgnore
 	private Set<Aula> aulas = new HashSet<Aula>(0);
 
 	public Professor() {
 	}
 
-	public Professor(String nome, Set<Aula> aulas) {
+	public Professor(String nome, String email, String telefone) {
 		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+	}
+
+	public Professor(String nome, String email, String telefone,
+			String endereco, Set<Aula> aulas) {
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.endereco = endereco;
 		this.aulas = aulas;
 	}
 
@@ -53,13 +62,40 @@ public class Professor implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "nome")
+	@Column(name = "nome", nullable = false)
 	public String getNome() {
 		return this.nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	@Column(name = "email", nullable = false, length = 45)
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Column(name = "telefone", nullable = false, length = 20)
+	public String getTelefone() {
+		return this.telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	@Column(name = "endereco")
+	public String getEndereco() {
+		return this.endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "professor")
@@ -69,33 +105,6 @@ public class Professor implements java.io.Serializable {
 
 	public void setAulas(Set<Aula> aulas) {
 		this.aulas = aulas;
-	}
-
-	@Column(name = "telefone")
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	@Column(name = "endereco")
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	@Column(name = "email")
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 }

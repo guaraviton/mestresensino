@@ -4,10 +4,12 @@ import java.util.List;
 
 import br.com.mestres.ensino.webapp.spring.persistence.model.Sala;
 
-public interface SalaDAO {
+public interface SalaDAO extends CrudDAO<Sala>{
 
-	void salvar(Sala sala);
-	
+	Sala get(Integer id);
+
+	List<Sala> getSalas(Integer numero);
+
 	List<Sala> get();
 
 }

@@ -1,6 +1,6 @@
 package br.com.mestres.ensino.webapp.spring.persistence.model;
 
-// Generated 01/08/2014 01:15:09 by Hibernate Tools 4.0.0
+// Generated 05/08/2014 23:00:01 by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

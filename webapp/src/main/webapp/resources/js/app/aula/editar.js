@@ -52,9 +52,9 @@ $(function() {
 		console.log($("#idSala").val());
 	});
 	
-	$("#dataInicio").datepicker({dateFormat: 'dd/mm/yy'});
+	$("#data").datepicker({dateFormat: 'dd/mm/yy'});
 	
-	$("#dataFim").datepicker({dateFormat: 'dd/mm/yy'});
+	$('#horas').mask('000');
 	
 	
 	$( "button").button();

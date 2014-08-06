@@ -3,6 +3,8 @@ $(function() {
 	$('#telefone').mask('(00) 00000-0000');
 	$('#dataNascimento').mask('00/00/0000');
 	$( "button").button();
+	$('#quantidadeHorasCompradas').mask('0.000');
+	$('#quantidadeHorasDisponivel').mask('0.000');
 
 	$("#buttonSalvar").click(function( event ) {
 		salvar();
@@ -26,5 +28,11 @@ $(function() {
 
 
 var salvar = function() {
-	app.ajax({url: '/api/aluno', type : 'POST', formId : 'alunoForm', setId : true});
+	app.ajax({url: '/api/aluno', type : 'POST', formId : 'alunoForm', setId : true, success : appSuccess});
 };
+
+var appSuccess = function(data, textStatus, jqXHR, setId) {
+	defaultSucessFunction(data, textStatus, jqXHR, options.setId);
+	$("#labelQuantidadeHorasCompradas").text('Quantidade horas disponiveis');
+	$("#quantidadeHorasCompradas").prop("readonly",true);
+}

@@ -90,7 +90,20 @@
 				</select>
 			</div>
 		</div>
-
+		
+		<div class="formspacer">
+			<div class="bloco">
+				<c:if test="${aluno.id eq null}">
+					<label for="quantidadeHorasCompradas" id="labelQuantidadeHorasCompradas"><spring:message code="label.quantidade.horas.compradas" /></label> 
+					<input type="text" class="text big " id="quantidadeHorasCompradas" name="quantidadeHorasCompradas" value="" tabindex="8" maxlength="5" style="width: 50px">
+				</c:if>
+				<c:if test="${aluno.id ne null}">
+					<label for="quantidadeHorasDisponivel"><spring:message code="label.quantidade.horas.disponiveis" /></label> 
+					<input type="text" class="text big " id="quantidadeHorasDisponivel" name="quantidadeHorasDisponivel" value="${quantidadeHorasDisponiveis}" tabindex="8" maxlength="5" style="width: 50px" readonly="readonly">
+				</c:if>
+			</div>
+		</div>
+	
 		<div class="buttonspacer">
 			<button id="buttonVoltar"><spring:message code="label.voltar" /></button>
 			<button id="buttonSalvar"><spring:message code="label.salvar" /></button>

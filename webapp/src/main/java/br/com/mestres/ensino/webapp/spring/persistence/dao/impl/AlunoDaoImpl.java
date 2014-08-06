@@ -8,17 +8,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.mestres.ensino.webapp.spring.persistence.dao.AlunoDAO;
-import br.com.mestres.ensino.webapp.spring.persistence.dao.helper.DAOTemplate;
+import br.com.mestres.ensino.webapp.spring.persistence.dao.helper.CrudDAOImpl;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.util.AppStringUtils;
 
 @Repository
-public class AlunoDaoImpl extends DAOTemplate implements AlunoDAO{
-	
-	@Override
-	public void salvar(Aluno aluno) {
-		template.saveOrUpdate(aluno);
-	}
+public class AlunoDaoImpl extends CrudDAOImpl<Aluno> implements AlunoDAO{
 	
 	public List<Aluno> get(String nome, Integer idColegio) {
 		
@@ -39,5 +34,4 @@ public class AlunoDaoImpl extends DAOTemplate implements AlunoDAO{
 	public Aluno get(Integer id) {
 		return template.get(Aluno.class, id);
 	}
-
 }

@@ -8,12 +8,12 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.mestres.ensino.webapp.spring.persistence.dao.ColegioDAO;
-import br.com.mestres.ensino.webapp.spring.persistence.dao.helper.DAOTemplate;
+import br.com.mestres.ensino.webapp.spring.persistence.dao.helper.CrudDAOImpl;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
 import br.com.mestres.ensino.webapp.spring.util.AppStringUtils;
 
 @Repository
-public class ColegioDaoImpl extends DAOTemplate implements ColegioDAO{
+public class ColegioDaoImpl extends CrudDAOImpl<Colegio> implements ColegioDAO{
 	
 	@Override
 	public List<Colegio> get() {
@@ -35,10 +35,4 @@ public class ColegioDaoImpl extends DAOTemplate implements ColegioDAO{
 		
         return (List<Colegio>) template.findByCriteria(criteria);
 	}
-
-	@Override
-	public void salvar(Colegio colegio) {
-		template.saveOrUpdate(colegio);
-	}
-
 }

@@ -84,6 +84,7 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		converter.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		converter.getObjectMapper().disable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+		converter.getObjectMapper().enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 		return converter;
 	}
 

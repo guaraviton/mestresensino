@@ -13,54 +13,49 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
-import br.com.mestres.ensino.webapp.spring.service.AlunoService;
-import br.com.mestres.ensino.webapp.spring.service.ProfessorService;
+import br.com.mestres.ensino.webapp.spring.persistence.model.Sala;
 import br.com.mestres.ensino.webapp.spring.service.SalaService;
-import br.com.mestres.ensino.webapp.spring.view.form.ColegioForm;
+import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
+import br.com.mestres.ensino.webapp.spring.util.AppNumberUtils;
+import br.com.mestres.ensino.webapp.spring.view.form.SalaForm;
 
 @Controller
-@RequestMapping("/aula")
-public class AulaController {
+@RequestMapping("/sala")
+public class SalaController {
 
-	@Autowired
-	ProfessorService professorService;
-	
 	@Autowired
 	SalaService salaService;
 	
-	@Autowired
-	AlunoService alunoService;
-	
 	@RequestMapping(value="/editar.html",method = RequestMethod.GET)
     public String editar(Model model) {
-		model.addAttribute("professores", professorService.get());
-		model.addAttribute("salas", salaService.get());
-		model.addAttribute("alunos", alunoService.get(null, null));
-        return "aula.editar";
+        return "sala.editar";
     }
 	
 	@RequestMapping(value="/index.html",method = RequestMethod.GET)
     public String consultar(Model model) {
-        return "aula.consultar";
+        return "sala.consultar";
     }
 	
-	@RequestMapping(value="/{idColegio}", method = RequestMethod.GET)
-    public String get(@PathVariable Integer idColegio, Model model) {
-		model.addAttribute("professores", professorService.get());
-		model.addAttribute("salas", salaService.get());
-		model.addAttribute("alunos", alunoService.get(null, null));
-        return "aula.editar";
+	@RequestMapping(value="/{idSala}", method = RequestMethod.GET)
+    public String get(@PathVariable Integer idSala, Model model) {
+		Sala sala = salaService.get(idSala);
+		model.addAttribute(sala);
+        return "sala.editar";
     }
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-    public DataTableWrapperDTO get(@RequestParam(required=false, defaultValue="") String nome) {
-        return new DataTableWrapperDTO(null);
+    public DataTableWrapperDTO get(@RequestParam(required=false) Integer numero) {
+        return new DataTableWrapperDTO(salaService.getSalas(numero));
     }
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-    public Integer salvar(@Valid @RequestBody ColegioForm form) {
-		return null;
+    public Integer salvar(@Valid @RequestBody SalaForm form) {
+		Sala sala = new Sala();
+		AppBeanProperties.copyProperties(sala, form);
+		sala.setAssentosDisponiveis(AppNumberUtils.converte(form.getAssentosDisponiveis()));
+		salaService.salvar(sala);
+		return sala.getId();
     }
 }
