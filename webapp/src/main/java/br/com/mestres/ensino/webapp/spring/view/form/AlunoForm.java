@@ -1,9 +1,13 @@
 package br.com.mestres.ensino.webapp.spring.view.form;
 
-import javax.validation.constraints.Size;
+import java.util.Date;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import br.com.mestres.ensino.webapp.spring.config.json.serializer.CustomDateDeserializer;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class AlunoForm {
 
@@ -21,9 +25,7 @@ public class AlunoForm {
 	@Email
 	private String email;
 	
-	@NotEmpty
-	@Size(min=10,max=10)
-	private String dataNascimento;
+	private Date dataNascimento;
 	
 	@NotEmpty
 	private String sexo;
@@ -70,10 +72,13 @@ public class AlunoForm {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	public String getDataNascimento() {
+	
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(String dataNascimento) {
+	
+	@JsonDeserialize(using = CustomDateDeserializer.class)
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 	public String getEndereco() {

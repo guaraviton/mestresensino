@@ -8,8 +8,25 @@
 
 		<div class="formspacer">
 			<div class="bloco">
-				<label for="nome"><spring:message code="label.nome" /></label> 
-				<input type="text" class="big" id="nome" name="nome" value="" tabindex="1" maxlength="255">
+				<label for="idProfessor"><spring:message code="label.professor" /></label> 
+				<select id="idProfessor" name="idProfessor">
+					<option value=""><spring:message code="label.selecione" /></option>
+					<c:forEach items="${professores}" var="professor">
+				       <option value="${professor.id}">${professor.nome}</option>
+				   	</c:forEach>
+				</select>
+			</div>
+		</div>
+		
+		<div class="formspacer">
+			<div class="bloco">
+				<label for="idSala"><spring:message code="label.sala" /></label> 
+				<select id="idSala" name="idSala">
+					<option value=""><spring:message code="label.selecione" /></option>
+					<c:forEach items="${salas}" var="sala">
+				       <option value="${sala.id}">${sala.numero}</option>
+				   	</c:forEach>
+				</select>
 			</div>
 		</div>
 
@@ -19,16 +36,22 @@
 		</div>
 		
 		<div class="formspacer">
-			<table id="colegios" class="display appDataTable" cellspacing="0" width="100%">
+			<table id="aulas" class="display appDataTable" cellspacing="0" width="100%">
 			    <thead>
 			        <tr>
-			            <th><spring:message code="label.nome" /></th>
+			            <th><spring:message code="label.professor" /></th>
+			            <th><spring:message code="label.sala" /></th>
+			            <th><spring:message code="label.data" /></th>
+			            <th><spring:message code="label.horario" /></th>
 			        </tr>
 			    </thead>
 			 
 			    <tfoot>
 			        <tr>
-			           <th><spring:message code="label.nome" /></th>
+			           <th><spring:message code="label.professor" /></th>
+			            <th><spring:message code="label.sala" /></th>
+			            <th><spring:message code="label.data" /></th>
+			            <th><spring:message code="label.horario" /></th>
 			        </tr>
 			    </tfoot>
 			</table>

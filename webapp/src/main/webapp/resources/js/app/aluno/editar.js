@@ -1,6 +1,7 @@
 $(function() {
 	$('#cep').mask('00000-000');
 	$('#telefone').mask('(00) 00000-0000');
+	$("#dataNascimento").datepicker({dateFormat: 'dd/mm/yy'});
 	$('#dataNascimento').mask('00/00/0000');
 	$( "button").button();
 	$('#quantidadeHorasCompradas').mask('0.000');
@@ -18,10 +19,6 @@ $(function() {
 	
 	$("#idColegio").chosen({
 		no_results_text: 'Colegio inexistente'
-	}).change(function() {
-		// you can see the IDs in console off all items in autocomplete and
-		// deal with them
-		console.log($("#idColegio").val());
 	});
 	
 });

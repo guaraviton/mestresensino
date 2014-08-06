@@ -12,15 +12,27 @@ $(function() {
 		event.preventDefault();
     });
 	
+	$("#idProfessor").chosen({
+		no_results_text: 'Professor inexistente'
+	});
+	
+	$("#idSala").chosen({
+		no_results_text: 'Sala inexistente'
+	});
+	
 });
 
 var consultar = function() {
 	var params = [
-	              {nome : 'nome' , valor : $('#nome').val()}
+	              {nome : 'idProfessor' , valor : $('#idProfessor').val()},
+	              {nome : 'idSala' , valor : $('#idSala').val()}
 	];
 	
 	var columns = [
-	               { "data": "nome" }
+	               { "data": "professor.nome" },
+	               { "data": "sala.numero" },
+	               { "data": "data"},
+	               { "data": "horario"}
 	];
 	
 	var columnDefs = [{
@@ -30,7 +42,7 @@ var consultar = function() {
 	    				"targets": [0]
 	}];
 	
-	app.dataTable({tableId: 'colegios', url: '/api/colegio', params : params, columns : columns, columnDefs : columnDefs});
+	app.dataTable({tableId: 'aulas', url: '/api/aula', params : params, columns : columns, columnDefs : columnDefs});
 };
 
 

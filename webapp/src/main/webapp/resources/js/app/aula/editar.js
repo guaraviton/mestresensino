@@ -30,29 +30,21 @@ $(function() {
 	$("#idAlunos").chosen({
 		placeholder_text: 'Selecione os alunos para a aula',
 		no_results_text: 'Aluno inexistente'
-	}).change(function() {
-		// you can see the IDs in console off all items in autocomplete and
-		// deal with them
-		console.log($("#idAlunos").val());
 	});
 	
 	$("#idProfessor").chosen({
 		no_results_text: 'Professor inexistente'
-	}).change(function() {
-		// you can see the IDs in console off all items in autocomplete and
-		// deal with them
-		console.log($("#idProfessor").val());
 	});
 	
 	$("#idSala").chosen({
 		no_results_text: 'Sala inexistente'
-	}).change(function() {
-		// you can see the IDs in console off all items in autocomplete and
-		// deal with them
-		console.log($("#idSala").val());
 	});
 	
 	$("#data").datepicker({dateFormat: 'dd/mm/yy'});
+	
+	$('#data').mask('00/00/0000');
+	
+	$('#horario').mask('00:00');
 	
 	$('#horas').mask('000');
 	
@@ -69,3 +61,7 @@ $(function() {
     	event.preventDefault();
     });
 });
+
+var salvar = function() {
+	app.ajax({url: '/api/aula', type : 'POST', formId : 'aulaForm', setId : true});
+};

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Configuration
 @ComponentScan(basePackages = { "br.com.mestres.ensino.webapp.spring" })
@@ -57,8 +58,8 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
 		lr.setDefaultLocale(new Locale(defaultLocale));
 		return lr;
 	}
-
-	@Override
+	
+		@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations(
 				"/resources/");
@@ -84,9 +85,9 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
 		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
 		converter.getObjectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 		converter.getObjectMapper().disable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-		converter.getObjectMapper().enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
-		return converter;
-	}
+		converter.getObjectMapper().disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		converter.getObjectMapper().enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);		return converter;
+	}	
 
 	/*
 	 * @Override public void addInterceptors(final InterceptorRegistry registry)

@@ -58,8 +58,15 @@ $.fn.serializeObject = function() {
     	}
     	if (this.name === null || this.name === undefined || this.name === '') return;
     	var elemValue = null;
-    	if ($(this).is('select')) elemValue = $(this).find('option:selected').val();
-    	else elemValue = this.value;
+    	if ($(this).is('select')){
+    		if($(this).prop('multiple')){
+    			elemValue = $(this).val();
+    		}else{
+    			elemValue = $(this).find('option:selected').val();
+    		}
+    	}else{
+    		elemValue = this.value;
+    	}
     	if (o[this.name] !== undefined) {
     		if (!o[this.name].push) {
     			o[this.name] = [o[this.name]];
@@ -135,7 +142,7 @@ var tratarMensagensValidacao = function(jqXHR){
 			 var campo = $("#"+value.field);
 			 if ($("#mensagemErro_"+value.field).length <= 0){
 				 campo.parent().after('<span class="errorblock" id="mensagemErro_'+value.field+'">'+value.message+'</span>')
-				 campo.addClass("error");
+				 //campo.addClass("error");
 			 }
 			 
 		});

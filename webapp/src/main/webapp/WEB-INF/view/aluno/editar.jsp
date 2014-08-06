@@ -1,5 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="container cadastro">
 
@@ -39,7 +40,7 @@
 		<div class="formspacer">
 			<div class="bloco">
 					<label for="dataNascimento"><spring:message code="label.data.nascimento" /></label> 
-					<input type="text" class="text big " id="dataNascimento" name="dataNascimento" value="${aluno.dataNascimento}" tabindex="5" maxlength="10" style="width: 105px"> 
+					<input type="text" class="text big " id="dataNascimento" name="dataNascimento" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${aluno.dataNascimento}" />" tabindex="5" maxlength="10" style="width: 105px"> 
 			</div>
 		</div>
 		

@@ -42,7 +42,7 @@ public class AlunoAula implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "aluno_id", nullable = false)
 	public Aluno getAluno() {
 		return this.aluno;
@@ -52,7 +52,7 @@ public class AlunoAula implements java.io.Serializable {
 		this.aluno = aluno;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "aula_id", nullable = false)
 	public Aula getAula() {
 		return this.aula;
