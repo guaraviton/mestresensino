@@ -61,5 +61,4 @@ public class AlunoAula implements java.io.Serializable {
 	public void setAula(Aula aula) {
 		this.aula = aula;
 	}
-
 }

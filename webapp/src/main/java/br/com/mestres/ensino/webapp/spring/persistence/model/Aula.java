@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -76,8 +77,7 @@ public class Aula implements java.io.Serializable {
 		this.professor = professor;
 	}
 
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "aula")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "aula", orphanRemoval = true, cascade = {CascadeType.ALL})
 	public Set<AlunoAula> getAlunoAulas() {
 		return this.alunoAulas;
 	}
@@ -112,5 +112,4 @@ public class Aula implements java.io.Serializable {
 	public void setHoras(Integer horas) {
 		this.horas = horas;
 	}
-
 }

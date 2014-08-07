@@ -36,9 +36,19 @@
 			<div class="bloco">
 				<label for="idAlunos"><spring:message code="label.alunos" /></label> 
 				<select id="idAlunos" multiple name="idAlunos">
-					<c:forEach items="${alunos}" var="aluno">
-			       		<option value="${aluno.id}" ${alunosSelecionados.contains(aluno.id) ? 'selected' : ''}>${aluno.nome}</option>
+			   		
+			   		<c:set var="alunosSelecionados" value="" />
+			   		<c:forEach items="${aula.alunoAulas}" var="alunoAula">
+			   			<option value="${alunoAula.aluno.id}-${alunoAula.id}" selected>${alunoAula.aluno.nome}</option>
+			   			<c:set var="alunosSelecionados" value="${alunosSelecionados},${alunoAula.aluno.id}" />
 			   		</c:forEach>
+			   		
+			   		<c:forEach items="${alunos}" var="aluno" varStatus="x">
+			   			<c:if test="${not alunosSelecionados.contains(aluno.id.toString())}">
+			   				<option value="${aluno.id}">${aluno.nome}</option>
+			   			</c:if>
+			   		</c:forEach>
+			   		
 				</select>
 			</div>
 		</div>

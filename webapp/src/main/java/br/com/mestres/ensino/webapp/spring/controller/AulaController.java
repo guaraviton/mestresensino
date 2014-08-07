@@ -1,9 +1,5 @@
 package br.com.mestres.ensino.webapp.spring.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
+import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.persistence.model.AlunoAula;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aula;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Professor;
@@ -66,17 +63,9 @@ public class AulaController {
 		model.addAttribute("professores", professorService.get());
 		model.addAttribute("salas", salaService.get());
 		model.addAttribute("alunos", alunoService.get(null, null));
-		model.addAttribute("alunosSelecionados", getAlunosSelecionados(aula.getAlunoAulas()));
         return "aula.editar";
     }
 	
-	private List<Integer> getAlunosSelecionados(Set<AlunoAula> alunoAulas) {
-		List<Integer> alunosSelecionados = new ArrayList<Integer>();
-		for(AlunoAula alunoAula : alunoAulas){
-			alunosSelecionados.add(alunoAula.getAluno().getId());
-		}
-		return alunosSelecionados;
-	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
@@ -88,7 +77,13 @@ public class AulaController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
     public Integer salvar(@Valid @RequestBody AulaForm form) {
-		Aula aula = new Aula();
+		Aula aula;
+		if(form.getId() != null){
+			aula = aulaService.get(form.getId());
+		}else{
+			aula = new Aula();
+		}
+		
 		AppBeanProperties.copyProperties(aula, form);
 		
 		Professor professor = new Professor();
@@ -99,7 +94,22 @@ public class AulaController {
 		sala.setId(form.getIdSala());
 		aula.setSala(sala);
 		
-		aulaService.salvar(aula, form.getIdAlunos());
+		aula.getAlunoAulas().clear();
+		for(String idAluno : form.getIdAlunos()){
+			
+			String[] idAlunoAula = idAluno.split("-");
+			
+			Integer idEntidadeAluno = Integer.parseInt(idAlunoAula[0].toString());
+			Integer idEntidadeAlunoAula = null;
+			if(idAlunoAula.length == 2){
+				idEntidadeAlunoAula = Integer.parseInt(idAlunoAula[1].toString());
+			}
+			
+			AlunoAula alunoAula = new AlunoAula(new Aluno(idEntidadeAluno), aula);
+			alunoAula.setId(idEntidadeAlunoAula);
+			aula.getAlunoAulas().add(alunoAula);
+		}
+		aulaService.salvar(aula);
 		return aula.getId();
     }
 }

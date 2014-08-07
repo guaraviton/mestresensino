@@ -21,7 +21,7 @@ public class AulaForm {
 	private Integer idSala;
 	
 	@NotNull
-	private Integer[] idAlunos;
+	private String[] idAlunos;
 	
 	@NotNull
 	private Date data;
@@ -56,11 +56,11 @@ public class AulaForm {
 		this.idSala = idSala;
 	}
 
-	public Integer[] getIdAlunos() {
+	public String[] getIdAlunos() {
 		return idAlunos;
 	}
 
-	public void setIdAlunos(Integer[] idAlunos) {
+	public void setIdAlunos(String[] idAlunos) {
 		this.idAlunos = idAlunos;
 	}
 

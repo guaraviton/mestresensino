@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -193,7 +194,7 @@ public class Aluno implements java.io.Serializable {
 		this.alunoAulas = alunoAulas;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aluno")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aluno", cascade = {CascadeType.ALL})
 	public Set<AlunoHora> getAlunoHoras() {
 		return this.alunoHoras;
 	}

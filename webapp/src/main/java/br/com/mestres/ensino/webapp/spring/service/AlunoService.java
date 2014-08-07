@@ -2,8 +2,6 @@ package br.com.mestres.ensino.webapp.spring.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 
 
@@ -13,7 +11,4 @@ public interface AlunoService extends CrudService<Aluno>{
 
 	Aluno get(Integer id);
 
-	@Transactional
-	void salvar(Aluno aluno, String quantidadeHorasCompradas);
-	
 }

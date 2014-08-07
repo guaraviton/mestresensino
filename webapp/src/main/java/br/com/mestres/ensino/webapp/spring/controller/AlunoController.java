@@ -1,5 +1,7 @@
 package br.com.mestres.ensino.webapp.spring.controller;
 
+import java.util.Calendar;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
+import br.com.mestres.ensino.webapp.spring.persistence.model.AlunoHora;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
 import br.com.mestres.ensino.webapp.spring.service.AlunoService;
 import br.com.mestres.ensino.webapp.spring.service.ColegioService;
 import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
+import br.com.mestres.ensino.webapp.spring.util.AppNumberUtils;
 import br.com.mestres.ensino.webapp.spring.view.form.AlunoForm;
 
 @Controller
@@ -72,8 +76,12 @@ public class AlunoController {
 			aluno.setColegio(colegio);
 		}
 		
-		alunoService.salvar(aluno, form.getQuantidadeHorasCompradas());
+		if(form.getId() == null && form.getQuantidadeHorasCompradas() != null){
+			AlunoHora alunoHora = new AlunoHora(aluno, AppNumberUtils.converte(form.getQuantidadeHorasCompradas()), Calendar.getInstance().getTime());
+			aluno.getAlunoHoras().add(alunoHora);
+		}
 		
+		alunoService.salvar(aluno);
 		
 		return aluno.getId();
     }
