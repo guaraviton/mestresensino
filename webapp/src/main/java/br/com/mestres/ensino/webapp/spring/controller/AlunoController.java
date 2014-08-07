@@ -18,6 +18,7 @@ import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.persistence.model.AlunoHora;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
+import br.com.mestres.ensino.webapp.spring.service.AlunoHoraService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoService;
 import br.com.mestres.ensino.webapp.spring.service.ColegioService;
 import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
@@ -30,6 +31,9 @@ public class AlunoController {
 
 	@Autowired
 	AlunoService alunoService;
+	
+	@Autowired
+	AlunoHoraService alunoHoraService;
 	
 	@Autowired
 	ColegioService colegioService;
@@ -51,7 +55,7 @@ public class AlunoController {
 		Aluno aluno = alunoService.get(idAluno);
 		model.addAttribute(aluno);
 		model.addAttribute("colegios", colegioService.get());
-		model.addAttribute("quantidadeHorasDisponiveis", 1200);
+		model.addAttribute("quantidadeHorasDisponiveis", alunoHoraService.getHorasCompradas(idAluno) - alunoHoraService.getHorasUtilizadas(idAluno));
         return "aluno.editar";
     }
 	

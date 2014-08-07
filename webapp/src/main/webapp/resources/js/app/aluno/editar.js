@@ -4,8 +4,8 @@ $(function() {
 	$("#dataNascimento").datepicker({dateFormat: 'dd/mm/yy'});
 	$('#dataNascimento').mask('00/00/0000');
 	$( "button").button();
-	$('#quantidadeHorasCompradas').mask('0.000');
-	$('#quantidadeHorasDisponivel').mask('0.000');
+	/*$('#quantidadeHorasCompradas').mask('0.000');
+	$('#quantidadeHorasDisponivel').mask('0.000');*/
 
 	$("#buttonSalvar").click(function( event ) {
 		salvar();

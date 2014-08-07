@@ -19,4 +19,14 @@ public class AlunoHoraServiceImpl extends CrudServiceImpl<AlunoHora> implements 
 	public CrudDAO<AlunoHora> getDAO() {
 		return dao;
 	}
+
+	@Override
+	public Integer getHorasCompradas(Integer id) {
+		return dao.getHorasCompradas(id);
+	}
+
+	@Override
+	public Integer getHorasUtilizadas(Integer id) {
+		return dao.getHorasUtilizadas(id);
+	}
 }
