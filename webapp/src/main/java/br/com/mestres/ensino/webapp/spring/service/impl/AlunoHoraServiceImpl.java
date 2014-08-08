@@ -29,4 +29,9 @@ public class AlunoHoraServiceImpl extends CrudServiceImpl<AlunoHora> implements 
 	public Integer getHorasUtilizadas(Integer id) {
 		return dao.getHorasUtilizadas(id);
 	}
+
+	@Override
+	public Integer getHorasDisponiveis(Integer id) {
+		return getHorasCompradas(id) - getHorasUtilizadas(id);
+	}
 }

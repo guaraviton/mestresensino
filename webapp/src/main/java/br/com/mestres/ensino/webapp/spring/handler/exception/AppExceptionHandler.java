@@ -1,12 +1,8 @@
 package br.com.mestres.ensino.webapp.spring.handler.exception;
 
 import java.util.List;
-import java.util.Locale;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
@@ -18,15 +14,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.mestres.ensino.webapp.spring.dto.ValidationErrorDTO;
+import br.com.mestres.ensino.webapp.spring.exception.AppBusinessException;
 import br.com.mestres.ensino.webapp.spring.exception.AppDeserializeException;
+import br.com.mestres.ensino.webapp.spring.util.message.AppMessageUtils;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 @ControllerAdvice
 public class AppExceptionHandler {
 
-	@Autowired
-	private MessageSource messageSource;
+	@ExceptionHandler({AppBusinessException.class})
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	public ValidationErrorDTO handleBusinessException(AppBusinessException abe) {
+		ValidationErrorDTO dto = new ValidationErrorDTO();
+		dto.addFieldError(null, abe.getMessage());
+		return dto;
+	}
 	
 	
 	@ExceptionHandler({HttpMessageNotReadableException.class})
@@ -36,7 +40,7 @@ public class AppExceptionHandler {
 		if(hmr.getCause() instanceof JsonMappingException && hmr.getCause().getCause() instanceof AppDeserializeException){
 			ValidationErrorDTO dto = new ValidationErrorDTO();
 			AppDeserializeException ex = (AppDeserializeException) hmr.getCause().getCause();
-			String localizedErrorMessage = messageSource.getMessage("Invalido." + ex.getCampo(), new Object[]{}, LocaleContextHolder.getLocale());
+			String localizedErrorMessage = AppMessageUtils.get("Invalido." + ex.getCampo());
 			dto.addFieldError(ex.getCampo(), localizedErrorMessage);
 			return dto;
 		}else{
@@ -66,12 +70,11 @@ public class AppExceptionHandler {
     }
  
     private String resolveLocalizedErrorMessage(FieldError fieldError) {
-        Locale currentLocale =  LocaleContextHolder.getLocale();
         String localizedErrorMessage = "";
  
         for(String key : fieldError.getCodes()){
         	try{
-        		localizedErrorMessage = messageSource.getMessage(key, new Object[]{}, currentLocale);
+        		localizedErrorMessage = AppMessageUtils.get(key);
         		break;
         	}catch(NoSuchMessageException ex){}
         	

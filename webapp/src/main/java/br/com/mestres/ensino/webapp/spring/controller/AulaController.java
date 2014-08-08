@@ -74,6 +74,14 @@ public class AulaController {
         return new DataTableWrapperDTO(aulaService.get(idProfessor, idSala));
     }
 	
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	@ResponseBody
+    public void excluir(@Valid @RequestBody AulaForm form) {
+		Aula aula = aulaService.get(form.getId());
+		aulaService.excluir(aula);
+	}
+	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
     public Integer salvar(@Valid @RequestBody AulaForm form) {
@@ -95,19 +103,21 @@ public class AulaController {
 		aula.setSala(sala);
 		
 		aula.getAlunoAulas().clear();
-		for(String idAluno : form.getIdAlunos()){
-			
-			String[] idAlunoAula = idAluno.split("-");
-			
-			Integer idEntidadeAluno = Integer.parseInt(idAlunoAula[0].toString());
-			Integer idEntidadeAlunoAula = null;
-			if(idAlunoAula.length == 2){
-				idEntidadeAlunoAula = Integer.parseInt(idAlunoAula[1].toString());
+		if(form.getIdAlunos() != null){
+			for(String idAluno : form.getIdAlunos()){
+				
+				String[] idAlunoAula = idAluno.split("-");
+				
+				Integer idEntidadeAluno = Integer.parseInt(idAlunoAula[0].toString());
+				Integer idEntidadeAlunoAula = null;
+				if(idAlunoAula.length == 2){
+					idEntidadeAlunoAula = Integer.parseInt(idAlunoAula[1].toString());
+				}
+				
+				AlunoAula alunoAula = new AlunoAula(new Aluno(idEntidadeAluno), aula);
+				alunoAula.setId(idEntidadeAlunoAula);
+				aula.getAlunoAulas().add(alunoAula);
 			}
-			
-			AlunoAula alunoAula = new AlunoAula(new Aluno(idEntidadeAluno), aula);
-			alunoAula.setId(idEntidadeAlunoAula);
-			aula.getAlunoAulas().add(alunoAula);
 		}
 		aulaService.salvar(aula);
 		return aula.getId();

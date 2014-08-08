@@ -22,7 +22,10 @@ app.dialog = function(options) {
       height:'auto',
       minHeight: 'auto',
       resizable: false,
-      buttons: options.buttons
+      buttons: options.buttons,
+      create: function( event, ui ) {
+    	  $(this).css("maxWidth", "700px");
+      }
 	});
 };
 

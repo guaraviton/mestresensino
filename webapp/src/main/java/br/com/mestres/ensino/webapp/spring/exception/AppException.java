@@ -7,6 +7,10 @@ public class AppException extends RuntimeException{
 		super(mensagem, e);
 	}
 	
+	public AppException(String mensagem) {
+		super(mensagem);
+	}
+	
 	public AppException(Exception e) {
 		super(e);
 	}

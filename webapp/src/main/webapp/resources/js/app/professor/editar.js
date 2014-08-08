@@ -8,7 +8,12 @@ $(function() {
     });
 	
 	$("#buttonVoltar").click(function( event ) {
-		location.href = "index.html";
+		app.voltar();
+    	event.preventDefault();
+    });
+	
+	$("#buttonExcluir").click(function( event ) {
+		excluir();
     	event.preventDefault();
     });
 	
@@ -17,4 +22,8 @@ $(function() {
 
 var salvar = function() {
 	app.ajax({url: '/api/professor', type : 'POST', formId : 'professorForm', setId : true});
+};
+
+var excluir = function() {
+	app.ajax({url: '/api/professor', type : 'DELETE', formId : 'professorForm', tipoSubmit : app.SUBMIT_AJAX_EXCLUIR});
 };

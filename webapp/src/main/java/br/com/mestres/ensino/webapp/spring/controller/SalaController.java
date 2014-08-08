@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
+import br.com.mestres.ensino.webapp.spring.persistence.model.Professor;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Sala;
 import br.com.mestres.ensino.webapp.spring.service.SalaService;
 import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
 import br.com.mestres.ensino.webapp.spring.util.AppNumberUtils;
+import br.com.mestres.ensino.webapp.spring.view.form.ProfessorForm;
 import br.com.mestres.ensino.webapp.spring.view.form.SalaForm;
 
 @Controller
@@ -54,8 +56,15 @@ public class SalaController {
     public Integer salvar(@Valid @RequestBody SalaForm form) {
 		Sala sala = new Sala();
 		AppBeanProperties.copyProperties(sala, form);
-		sala.setAssentosDisponiveis(AppNumberUtils.converte(form.getAssentosDisponiveis()));
+		sala.setAssentosDisponiveis(form.getAssentosDisponiveis());
 		salaService.salvar(sala);
 		return sala.getId();
     }
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	@ResponseBody
+    public void excluir(@Valid @RequestBody SalaForm form) {
+		Sala sala = salaService.get(form.getId());
+		salaService.excluir(sala);
+	}
 }

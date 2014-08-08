@@ -185,7 +185,7 @@ public class Aluno implements java.io.Serializable {
 		this.cep = cep;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "aluno")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "aluno", cascade = {CascadeType.ALL})
 	public Set<AlunoAula> getAlunoAulas() {
 		return this.alunoAulas;
 	}

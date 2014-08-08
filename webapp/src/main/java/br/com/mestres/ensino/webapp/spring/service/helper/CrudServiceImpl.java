@@ -14,4 +14,9 @@ public abstract class CrudServiceImpl<T extends Serializable> {
 	public void salvar(T entidade) {
 		getDAO().salvar(entidade);
 	}
+	
+	@Transactional
+	public void excluir(T entidade) {
+		getDAO().excluir(entidade);
+	}
 }

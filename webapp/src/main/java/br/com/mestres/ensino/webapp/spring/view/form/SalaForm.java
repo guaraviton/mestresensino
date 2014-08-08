@@ -10,7 +10,7 @@ public class SalaForm {
 	private Integer numero;
 	
 	@NotNull
-	private String assentosDisponiveis;
+	private Integer assentosDisponiveis;
 
 	public Integer getId() {
 		return id;
@@ -28,11 +28,11 @@ public class SalaForm {
 		this.numero = numero;
 	}
 
-	public String getAssentosDisponiveis() {
+	public Integer getAssentosDisponiveis() {
 		return assentosDisponiveis;
 	}
 
-	public void setAssentosDisponiveis(String assentosDisponiveis) {
+	public void setAssentosDisponiveis(Integer assentosDisponiveis) {
 		this.assentosDisponiveis = assentosDisponiveis;
 	}
 	

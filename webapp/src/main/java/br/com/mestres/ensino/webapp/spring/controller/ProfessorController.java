@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
+import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Professor;
 import br.com.mestres.ensino.webapp.spring.service.ProfessorService;
 import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
+import br.com.mestres.ensino.webapp.spring.view.form.ColegioForm;
 import br.com.mestres.ensino.webapp.spring.view.form.ProfessorForm;
 
 @Controller
@@ -56,4 +58,11 @@ public class ProfessorController {
 		professorService.salvar(professor);
 		return professor.getId();
     }
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	@ResponseBody
+    public void excluir(@Valid @RequestBody ProfessorForm form) {
+		Professor professor = professorService.get(form.getId());
+		professorService.excluir(professor);
+	}
 }

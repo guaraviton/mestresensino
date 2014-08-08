@@ -43,8 +43,10 @@
 			   			<c:set var="alunosSelecionados" value="${alunosSelecionados},${alunoAula.aluno.id}" />
 			   		</c:forEach>
 			   		
+			   		<c:set var="alunosSelecionados" value="${alunosSelecionados}," />
+			   		
 			   		<c:forEach items="${alunos}" var="aluno" varStatus="x">
-			   			<c:if test="${not alunosSelecionados.contains(aluno.id.toString())}">
+			   			<c:if test="${not alunosSelecionados.contains(','.concat(aluno.id.toString()).concat(','))}">
 			   				<option value="${aluno.id}">${aluno.nome}</option>
 			   			</c:if>
 			   		</c:forEach>
@@ -77,6 +79,7 @@
 		<div class="buttonspacer">
 			<button id="buttonVoltar"><spring:message code="label.voltar" /></button>
 			<button id="buttonSalvar"><spring:message code="label.salvar" /></button>
+			<button id="buttonExcluir"><spring:message code="label.excluir" /></button>
 		</div>
 	</form>
 </div>

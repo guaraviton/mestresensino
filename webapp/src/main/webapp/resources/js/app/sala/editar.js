@@ -1,6 +1,6 @@
 $(function() {
 	$('#numero').mask('000');
-	$('#assentosDisponiveis').mask('0.000');
+	$('#assentosDisponiveis').mask('000');
 	$( "button").button();
 
 	$("#buttonSalvar").click(function( event ) {
@@ -9,7 +9,12 @@ $(function() {
     });
 	
 	$("#buttonVoltar").click(function( event ) {
-		location.href = "index.html";
+		app.voltar();
+    	event.preventDefault();
+    });
+	
+	$("#buttonExcluir").click(function( event ) {
+		excluir();
     	event.preventDefault();
     });
 });
@@ -17,4 +22,8 @@ $(function() {
 
 var salvar = function() {
 	app.ajax({url: '/api/sala', type : 'POST', formId : 'salaForm', setId : true});
+};
+
+var excluir = function() {
+	app.ajax({url: '/api/sala', type : 'DELETE', formId : 'salaForm', tipoSubmit : app.SUBMIT_AJAX_EXCLUIR});
 };

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.mestres.ensino.webapp.spring.persistence.dao.AlunoDAO;
 import br.com.mestres.ensino.webapp.spring.persistence.dao.CrudDAO;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
+import br.com.mestres.ensino.webapp.spring.service.AlunoAulaService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoHoraService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoService;
 import br.com.mestres.ensino.webapp.spring.service.helper.CrudServiceImpl;
@@ -17,6 +18,9 @@ public class AlunoServiceImpl extends CrudServiceImpl<Aluno> implements AlunoSer
 
 	@Autowired
 	AlunoHoraService alunoHoraService;
+	
+	@Autowired
+	AlunoAulaService alunoAulaService;
 	
 	@Autowired
 	private AlunoDAO dao;
@@ -34,5 +38,13 @@ public class AlunoServiceImpl extends CrudServiceImpl<Aluno> implements AlunoSer
 	@Override
 	public CrudDAO<Aluno> getDAO() {
 		return dao;
+	}
+	
+	@Override
+	public void excluir(Aluno aluno) {
+		//para evitar deleted object would be re-saved by cascade 
+		alunoAulaService.excluir(aluno.getAlunoAulas());
+		aluno.setAlunoAulas(null);
+		super.excluir(aluno);
 	}
 }

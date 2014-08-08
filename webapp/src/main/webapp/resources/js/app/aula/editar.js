@@ -57,11 +57,21 @@ $(function() {
     });
 	
 	$("#buttonVoltar").click(function( event ) {
-		location.href = "index.html";
+		app.voltar();
     	event.preventDefault();
     });
+	
+	$("#buttonExcluir").click(function( event ) {
+		excluir();
+    	event.preventDefault();
+    });
+	
 });
 
 var salvar = function() {
 	app.ajax({url: '/api/aula', type : 'POST', formId : 'aulaForm', setId : true});
+};
+
+var excluir = function() {
+	app.ajax({url: '/api/aula', type : 'DELETE', formId : 'aulaForm', tipoSubmit : app.SUBMIT_AJAX_EXCLUIR});
 };

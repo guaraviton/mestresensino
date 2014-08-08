@@ -4,8 +4,7 @@ $(function() {
 	$("#dataNascimento").datepicker({dateFormat: 'dd/mm/yy'});
 	$('#dataNascimento').mask('00/00/0000');
 	$( "button").button();
-	/*$('#quantidadeHorasCompradas').mask('0.000');
-	$('#quantidadeHorasDisponivel').mask('0.000');*/
+	$('#quantidadeHorasCompradas').mask('000');
 
 	$("#buttonSalvar").click(function( event ) {
 		salvar();
@@ -13,7 +12,12 @@ $(function() {
     });
 	
 	$("#buttonVoltar").click(function( event ) {
-		location.href = "index.html";
+		app.voltar();
+    	event.preventDefault();
+    });
+	
+	$("#buttonExcluir").click(function( event ) {
+		excluir();
     	event.preventDefault();
     });
 	
@@ -28,8 +32,12 @@ var salvar = function() {
 	app.ajax({url: '/api/aluno', type : 'POST', formId : 'alunoForm', setId : true, success : appSuccess});
 };
 
+var excluir = function() {
+	app.ajax({url: '/api/aluno', type : 'DELETE', formId : 'alunoForm', tipoSubmit : app.SUBMIT_AJAX_EXCLUIR});
+};
+
 var appSuccess = function(data, textStatus, jqXHR, setId) {
-	defaultSucessFunction(data, textStatus, jqXHR, options.setId);
+	defaultSucessFunction(data, textStatus, jqXHR, options.setId, options.tipoSubmit);
 	$("#labelQuantidadeHorasCompradas").text('Quantidade horas disponiveis');
 	$("#quantidadeHorasCompradas").prop("readonly",true);
 }

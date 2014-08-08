@@ -5,6 +5,8 @@ var app = {
 	DIALOG_CHECK : 'dialog_check',
 	DIALOG_INFO : 'dialog_info',
 	DIALOG_ERROR : 'dialog_error',
+	SUBMIT_AJAX_SALVAR : 'submit_ajax_salvar',
+	SUBMIT_AJAX_EXCLUIR : 'submit_ajax_excluir',
 		
 	APP_PROPERTIES : {
 			"CONTEXO" : "/webapp"
@@ -30,3 +32,7 @@ app.tabIndexKeypress = function(e) {
 		next.focus()
 	}
 };
+
+app.voltar = function() {
+	history.back();
+}

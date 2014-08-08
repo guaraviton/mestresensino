@@ -18,6 +18,7 @@ import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.persistence.model.AlunoHora;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
+import br.com.mestres.ensino.webapp.spring.service.AlunoAulaService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoHoraService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoService;
 import br.com.mestres.ensino.webapp.spring.service.ColegioService;
@@ -31,6 +32,9 @@ public class AlunoController {
 
 	@Autowired
 	AlunoService alunoService;
+	
+	@Autowired
+	AlunoAulaService alunoAulaService;
 	
 	@Autowired
 	AlunoHoraService alunoHoraService;
@@ -55,7 +59,7 @@ public class AlunoController {
 		Aluno aluno = alunoService.get(idAluno);
 		model.addAttribute(aluno);
 		model.addAttribute("colegios", colegioService.get());
-		model.addAttribute("quantidadeHorasDisponiveis", alunoHoraService.getHorasCompradas(idAluno) - alunoHoraService.getHorasUtilizadas(idAluno));
+		model.addAttribute("quantidadeHorasDisponiveis", alunoHoraService.getHorasDisponiveis(idAluno));
         return "aluno.editar";
     }
 	
@@ -81,7 +85,7 @@ public class AlunoController {
 		}
 		
 		if(form.getId() == null && form.getQuantidadeHorasCompradas() != null){
-			AlunoHora alunoHora = new AlunoHora(aluno, AppNumberUtils.converte(form.getQuantidadeHorasCompradas()), Calendar.getInstance().getTime());
+			AlunoHora alunoHora = new AlunoHora(aluno, form.getQuantidadeHorasCompradas(), Calendar.getInstance().getTime());
 			aluno.getAlunoHoras().add(alunoHora);
 		}
 		
@@ -89,4 +93,11 @@ public class AlunoController {
 		
 		return aluno.getId();
     }
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	@ResponseBody
+    public void excluir(@Valid @RequestBody AlunoForm form) {
+		Aluno aluno = alunoService.get(form.getId());
+		alunoService.excluir(aluno);
+	}
 }

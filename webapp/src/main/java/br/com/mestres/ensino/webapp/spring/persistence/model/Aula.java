@@ -19,7 +19,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.SortComparator;
+
 import br.com.mestres.ensino.webapp.spring.config.json.serializer.CustomDateSerializer;
+import br.com.mestres.ensino.webapp.spring.util.comparator.AlunoAulaComparator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

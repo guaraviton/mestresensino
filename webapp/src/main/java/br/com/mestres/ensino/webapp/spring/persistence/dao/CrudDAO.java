@@ -6,5 +6,5 @@ public interface CrudDAO<T extends Serializable> {
 
 	void salvar(T entidade);
 	
-	void deletar(T entidade);
+	void excluir(T entidade);
 }

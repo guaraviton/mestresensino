@@ -20,7 +20,7 @@ public class AulaForm {
 	@NotNull
 	private Integer idSala;
 	
-	@NotNull
+	//@NotNull
 	private String[] idAlunos;
 	
 	@NotNull

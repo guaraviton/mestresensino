@@ -38,6 +38,7 @@
 		<div class="buttonspacer">
 			<button id="buttonVoltar"><spring:message code="label.voltar" /></button>
 			<button id="buttonSalvar"><spring:message code="label.salvar" /></button>
+			<button id="buttonExcluir"><spring:message code="label.excluir" /></button>
 		</div>
 	</form>
 </div>

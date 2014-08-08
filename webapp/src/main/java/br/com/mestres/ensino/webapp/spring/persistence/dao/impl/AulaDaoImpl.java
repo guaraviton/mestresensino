@@ -2,10 +2,8 @@ package br.com.mestres.ensino.webapp.spring.persistence.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +30,8 @@ public class AulaDaoImpl extends CrudDAOImpl<Aula> implements AulaDAO{
 		if(idSala != null){
 			criteria.add(Restrictions.eq("sala.id", idSala));
 		}
+		
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		
         return (List<Aula>) template.findByCriteria(criteria);
 	}

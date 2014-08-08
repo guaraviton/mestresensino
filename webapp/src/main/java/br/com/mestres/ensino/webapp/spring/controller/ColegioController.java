@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
+import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
 import br.com.mestres.ensino.webapp.spring.service.ColegioService;
 import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
+import br.com.mestres.ensino.webapp.spring.view.form.AlunoForm;
 import br.com.mestres.ensino.webapp.spring.view.form.ColegioForm;
 
 @Controller
@@ -56,4 +58,11 @@ public class ColegioController {
 		colegioService.salvar(colegio);
 		return colegio.getId();
     }
+	
+	@RequestMapping(method = RequestMethod.DELETE)
+	@ResponseBody
+    public void excluir(@Valid @RequestBody ColegioForm form) {
+		Colegio colegio = colegioService.get(form.getId());
+		colegioService.excluir(colegio);
+	}
 }

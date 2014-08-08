@@ -8,7 +8,7 @@ public abstract class CrudDAOImpl<T extends Serializable> extends DAO{
 		template.saveOrUpdate(entidade);
 	}
 	
-	public void deletar(T entidade){
+	public void excluir(T entidade){
 		template.delete(entidade);
 	}
 	

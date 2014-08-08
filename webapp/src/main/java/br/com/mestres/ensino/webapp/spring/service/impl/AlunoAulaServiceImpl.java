@@ -1,5 +1,7 @@
 package br.com.mestres.ensino.webapp.spring.service.impl;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,15 @@ public class AlunoAulaServiceImpl extends CrudServiceImpl<AlunoAula> implements 
 	@Override
 	public CrudDAO<AlunoAula> getDAO() {
 		return dao;
+	}
+
+	@Override
+	public void excluir(Set<AlunoAula> alunoAulas) {
+		if(alunoAulas != null){
+			for(AlunoAula alunoAula : alunoAulas){
+				dao.excluir(alunoAula);
+			}
+		}
 	}
 	
 }

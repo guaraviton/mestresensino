@@ -12,7 +12,8 @@ app.ajax = function(options_){
 		success : options_.success ? options_.success : defaultSucessFunction,
 		setId : options_.setId ? options_.setId : null,
 		error : options_.error ? options_.error : defaultErrorFunction,
-		complete : options_.complete ? options_.complete : defaultCompleteFunction
+		complete : options_.complete ? options_.complete : defaultCompleteFunction,
+		tipoSubmit : options_.tipoSubmit ? options_.tipoSubmit : app.SUBMIT_AJAX_SALVAR 
 	};
 	
 	$.ajax({
@@ -26,7 +27,7 @@ app.ajax = function(options_){
 			options.beforeSend(jqXHR, settings);
 		},
 		success : function(data, textStatus, jqXHR, setId) {
-			options.success(data, textStatus, jqXHR, options.setId);
+			options.success(data, textStatus, jqXHR, options.setId, options.tipoSubmit);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			options.error(jqXHR, textStatus, errorThrown);
@@ -92,14 +93,18 @@ var defaultBeforeSendFunction = function(jqXHR, settings){
 	$("input").removeClass("error");
 }
 
-var defaultSucessFunction = function(data, textStatus, jqXHR, setId){
+var defaultSucessFunction = function(data, textStatus, jqXHR, setId, tipoSubmit){
 	
 	optionsDialog = {
 			tipoDialog : app.DIALOG_CHECK,
-			mensagem : 'Dados gravados com sucesso.',
+			mensagem : tipoSubmit == app.SUBMIT_AJAX_SALVAR ? 'Dados gravados com sucesso.' : 'Dados excluidos com sucesso',
 			buttons : {
 				Ok: function() {
-			         $( this ).dialog( "close" )
+					if(tipoSubmit == app.SUBMIT_AJAX_SALVAR){
+						$( this ).dialog( "close" );
+					}else{
+						app.voltar();
+					}
 				}
 			}
 	}
@@ -140,7 +145,20 @@ var tratarMensagensValidacao = function(jqXHR){
 	$.each(jsonErrors, function() {
 		$.each(this, function(name, value) {
 			 var campo = $("#"+value.field);
-			 if ($("#mensagemErro_"+value.field).length <= 0){
+			 if(!value.field){
+				 
+				 optionsDialog = {
+							tipoDialog : app.DIALOG_ERROR,
+							mensagem : value.message,
+							buttons : {
+								Ok: function() {
+							         $( this ).dialog( "close" )
+								}
+							}
+					}
+				 
+				 app.dialog(optionsDialog);
+			 }else if ($("#mensagemErro_"+value.field).length <= 0){
 				 campo.parent().after('<span class="errorblock" id="mensagemErro_'+value.field+'">'+value.message+'</span>')
 				 //campo.addClass("error");
 			 }

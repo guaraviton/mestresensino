@@ -8,4 +8,7 @@ public interface CrudService<T extends Serializable> {
 
 	@Transactional
 	void salvar(T entidade);
+	
+	@Transactional
+	void excluir(T entidade);
 }

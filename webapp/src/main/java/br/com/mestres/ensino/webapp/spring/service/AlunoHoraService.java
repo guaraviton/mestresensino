@@ -7,4 +7,5 @@ public interface AlunoHoraService extends CrudService<AlunoHora>{
 
 	Integer getHorasCompradas(Integer id);
 	Integer getHorasUtilizadas(Integer id);
+	Integer getHorasDisponiveis(Integer id);
 }

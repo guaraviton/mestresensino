@@ -39,7 +39,7 @@ public class AlunoForm {
 	
 	private Integer idColegio;
 	
-	private String quantidadeHorasCompradas;
+	private Integer quantidadeHorasCompradas;
 	
 	
 	public String getNome() {
@@ -111,10 +111,10 @@ public class AlunoForm {
 	public void setIdColegio(Integer idColegio) {
 		this.idColegio = idColegio;
 	}
-	public String getQuantidadeHorasCompradas() {
+	public Integer getQuantidadeHorasCompradas() {
 		return quantidadeHorasCompradas;
 	}
-	public void setQuantidadeHorasCompradas(String quantidadeHorasCompradas) {
+	public void setQuantidadeHorasCompradas(Integer quantidadeHorasCompradas) {
 		this.quantidadeHorasCompradas = quantidadeHorasCompradas;
 	}
 
