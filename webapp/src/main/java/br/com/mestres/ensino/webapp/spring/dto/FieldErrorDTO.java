@@ -1,13 +1,13 @@
 package br.com.mestres.ensino.webapp.spring.dto;
 
-public class FieldErrorDTO {
+public class FieldErrorDTO extends ErrorDTO{
 	
 	private String field;
-	private String message;
 
 	public FieldErrorDTO(String field, String message) {
+		super(message);
 		this.field = field;
-		this.message = message;
+		
 	}
 
 	public String getField() {
@@ -16,13 +16,5 @@ public class FieldErrorDTO {
 
 	public void setField(String field) {
 		this.field = field;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 }

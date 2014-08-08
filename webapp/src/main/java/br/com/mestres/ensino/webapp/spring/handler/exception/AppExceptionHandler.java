@@ -3,6 +3,7 @@ package br.com.mestres.ensino.webapp.spring.handler.exception;
 import java.util.List;
 
 import org.springframework.context.NoSuchMessageException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
@@ -28,10 +29,18 @@ public class AppExceptionHandler {
 	@ResponseBody
 	public ValidationErrorDTO handleBusinessException(AppBusinessException abe) {
 		ValidationErrorDTO dto = new ValidationErrorDTO();
-		dto.addFieldError(null, abe.getMessage());
+		dto.addError(abe.getMessage());
 		return dto;
 	}
 	
+	@ExceptionHandler({DataIntegrityViolationException.class})
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseBody
+	public ValidationErrorDTO handleFKException(DataIntegrityViolationException abe) {
+		ValidationErrorDTO dto = new ValidationErrorDTO();
+		dto.addError(AppMessageUtils.get("exclusao.nao.realizada.registro.utilizado.sistema"));
+		return dto;
+	}
 	
 	@ExceptionHandler({HttpMessageNotReadableException.class})
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
