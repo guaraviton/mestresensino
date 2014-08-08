@@ -16,6 +16,28 @@ app.ajax = function(options_){
 		tipoSubmit : options_.tipoSubmit ? options_.tipoSubmit : app.SUBMIT_AJAX_SALVAR 
 	};
 	
+	if(options.tipoSubmit == app.SUBMIT_AJAX_EXCLUIR){
+		optionsDialog = {
+				tipoDialog : app.DIALOG_INFO,
+				mensagem : 'Deseja excluir os dados?',
+				id : 'excluirDialog',
+				buttons : {
+					'Sim': function() {
+						$( this ).dialog( "close" );
+						enviar(options);
+					},
+			        Cancel: function() {
+			        	$( this ).dialog( "close" );
+			        }
+				}
+		}
+		app.dialog(optionsDialog);
+	}else{
+		enviar(options);
+	}
+}
+
+var enviar = function(options){
 	$.ajax({
 		url : app.APP_PROPERTIES.CONTEXO + options.url,
 		dataType : 'json',
@@ -90,7 +112,7 @@ var defaultBeforeSendFunction = function(jqXHR, settings){
 	}
 	app.dialog(optionsDialog);
 	$('.errorblock').remove();
-	$("input").removeClass("error");
+	//$("input").removeClass("error");
 }
 
 var defaultSucessFunction = function(data, textStatus, jqXHR, setId, tipoSubmit){
