@@ -3,6 +3,7 @@ package br.com.mestres.ensino.webapp.spring.view.form;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -27,6 +28,7 @@ public class AulaForm {
 	private Date data;
 	
 	@NotEmpty
+	@Pattern(regexp = "([01]?[0-9]|2[0-3]):[0-5][0-9]")
 	private String horario;
 	
 	@NotNull

@@ -36,3 +36,20 @@ app.tabIndexKeypress = function(e) {
 app.voltar = function() {
 	history.back();
 }
+
+app.montarParametrosUrl = function(params){
+	var parametros = '';
+	if(params){
+		$.each(params, function(index) {
+			 nomeParametro = this.nome;
+			 valorParametro = this.valor;
+			 if(parametros != '' && (valorParametro && valorParametro != '' || index != (params.length - 1))){
+				 parametros += '&';
+			 }
+			 if(valorParametro && valorParametro != ''){
+				 parametros += nomeParametro + '=' + valorParametro;
+			 }
+		});
+	}
+	return parametros;
+}

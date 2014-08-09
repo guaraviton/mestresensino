@@ -23,7 +23,6 @@ import br.com.mestres.ensino.webapp.spring.service.AlunoHoraService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoService;
 import br.com.mestres.ensino.webapp.spring.service.ColegioService;
 import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
-import br.com.mestres.ensino.webapp.spring.util.AppNumberUtils;
 import br.com.mestres.ensino.webapp.spring.view.form.AlunoForm;
 
 @Controller
@@ -41,6 +40,15 @@ public class AlunoController {
 	
 	@Autowired
 	ColegioService colegioService;
+	
+	@RequestMapping(value="/{idAluno}/horas",method = RequestMethod.POST)
+	@ResponseBody
+    public Integer incluirHoras(@PathVariable Integer idAluno,@RequestParam(required=false) Integer quantidade) {
+		Aluno aluno = alunoService.get(idAluno);
+		AlunoHora alunoHora = new AlunoHora(aluno, quantidade, Calendar.getInstance().getTime());
+		alunoHoraService.salvar(alunoHora);
+		return alunoHoraService.getHorasDisponiveis(idAluno);
+    }
 	
 	@RequestMapping(value="/editar.html",method = RequestMethod.GET)
     public String editar(Model model) {

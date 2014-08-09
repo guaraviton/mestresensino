@@ -1,6 +1,6 @@
 app.dataTable = function(options){
 	
-	var params = montarParametrosUrl(options.params);
+	var params = app.montarParametrosUrl(options.params);
 	var urlCompleta = app.APP_PROPERTIES.CONTEXO + options.url + (params ? '?' + params : '');
 	
 	$('#'+options.tableId).dataTable( {
@@ -13,19 +13,4 @@ app.dataTable = function(options){
 	
 	$('#'+options.tableId).css( "visibility", "visible" );
 	 
-}
-
-var montarParametrosUrl = function(params){
-	var parametros = '';
-	$.each(params, function(index) {
-		 nomeParametro = this.nome;
-		 valorParametro = this.valor;
-		 if(parametros != '' && (valorParametro && valorParametro != '' || index != (params.length - 1))){
-			 parametros += '&';
-		 }
-		 if(valorParametro && valorParametro != ''){
-			 parametros += nomeParametro + '=' + valorParametro;
-		 }
-	});
-	return parametros;
 }

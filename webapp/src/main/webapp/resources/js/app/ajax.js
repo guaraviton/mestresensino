@@ -4,8 +4,11 @@ app.ajax = function(options_){
 		options_ = {};
 	}
 	
+	var params = app.montarParametrosUrl(options_.params);
+	var urlCompleta = app.APP_PROPERTIES.CONTEXO + options_.url + (params ? '?' + params : '');
+	
 	options = {
-		url : options_.url,
+		url : urlCompleta,
 		type : options_.type ? options_.type : 'GET',
 		formId : options_.formId ? options_.formId : '',
 		beforeSend : options_.beforeSend ? options_.beforeSend : defaultBeforeSendFunction,
@@ -39,7 +42,7 @@ app.ajax = function(options_){
 
 var enviar = function(options){
 	$.ajax({
-		url : app.APP_PROPERTIES.CONTEXO + options.url,
+		url : options.url,
 		dataType : 'json',
 		type : options.type,
 		contentType : 'application/json',

@@ -109,6 +109,20 @@
 			<button id="buttonVoltar"><spring:message code="label.voltar" /></button>
 			<button id="buttonSalvar"><spring:message code="label.salvar" /></button>
 			<button id="buttonExcluir"><spring:message code="label.excluir" /></button>
+			<button id="buttonInserirHoras"><spring:message code="label.incluir.horas" /></button>
 		</div>
 	</form>
+</div>
+
+<div id="dialog-form" title="Incluir horas" class="ui-widget" style="display: none;">
+  <form id="horasForm">
+    <fieldset>
+    	<div class="formspacer">
+			<div class="bloco">
+					<label for="quantidade"><spring:message code="label.quantidade" />:</label>
+      				<input type="text" name="quantidade" id="quantidade" value="" class="text ui-widget-content ui-corner-all" style="width: 40px">
+			</div>
+     	</div>
+    </fieldset>
+  </form>
 </div>

@@ -43,7 +43,7 @@
 
 .ui-button-text-only .ui-button-text {
 	padding: 0.6em 5em;
-	font-size: 1.2em;
+	font-size: 1.1em;
 }
 
 .ui-dialog-buttonset .ui-button-text {
@@ -179,19 +179,19 @@ input.text.error {
 	font: 1.2em arial;
 }
 
-.chzn-single span{
-	display:table-cell !important;
- 	vertical-align:middle;
- 	height: 40px;
- 	font-size: 1.2em;
+.chzn-single span {
+	display: table-cell !important;
+	vertical-align: middle;
+	height: 40px;
+	font-size: 1.2em;
 }
 
-.chzn-drop{
+.chzn-drop {
 	font-size: 1.4em !important;
 	color: #666 !important;
 }
 
-.chzn-search input{
+.chzn-search input {
 	height: 35px;
 }
 
@@ -199,15 +199,43 @@ input.text.error {
 	background-position-y: 13px !important;
 }
 
-.chzn-container-single .chzn-single div b{
+.chzn-container-single .chzn-single div b {
 	background-position-y: 12px !important;
 }
-	
-.hasDatepicker{
-    width: 100px;
+
+.hasDatepicker {
+	width: 100px;
 }
 
-.dataTables_length select{
+.dataTables_length select {
 	width: 65px;
 	height: 35px;
+}
+
+.header {
+	margin: 0 auto;
+	height: 150px;
+	background: url(../../images/app/logotrans.png) center left no-repeat;
+	position: relative;
+	width: 900px;
+}
+
+.footer {
+}
+
+.break {
+	border-style: solid;
+	border-color: #A6A6A6;
+	background-color: #FFFFFF;
+	opacity: 0.55;
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Alpha(Opacity=55.00000000000001)";
+	filter: alpha(opacity = 55.00000000000001);
+	position: relative;
+	border-width: 0px 0px 2px;
+}
+
+.content {
+	margin-top: -25px;
+	margin-bottom: -3px;
 }
