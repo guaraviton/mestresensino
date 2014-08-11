@@ -26,14 +26,4 @@ public class SalaServiceImpl extends CrudServiceImpl<Sala> implements SalaServic
 	public CrudDAO<Sala> getDAO() {
 		return dao;
 	}
-
-	@Override
-	public Sala get(Integer id) {
-		return dao.get(id);
-	}
-
-	@Override
-	public List<Sala> get() {
-		return dao.get();
-	}
 }

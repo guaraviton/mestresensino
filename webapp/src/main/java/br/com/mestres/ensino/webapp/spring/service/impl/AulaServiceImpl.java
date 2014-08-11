@@ -12,7 +12,6 @@ import br.com.mestres.ensino.webapp.spring.persistence.dao.CrudDAO;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.persistence.model.AlunoAula;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aula;
-import br.com.mestres.ensino.webapp.spring.service.AlunoAulaService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoHoraService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoService;
 import br.com.mestres.ensino.webapp.spring.service.AulaService;
@@ -26,9 +25,6 @@ public class AulaServiceImpl extends CrudServiceImpl<Aula> implements AulaServic
 	private AulaDAO dao;
 	
 	@Autowired
-	private AlunoAulaService alunoAulaService;
-	
-	@Autowired
 	private AlunoHoraService alunoHoraService;
 	
 	@Autowired
@@ -37,11 +33,6 @@ public class AulaServiceImpl extends CrudServiceImpl<Aula> implements AulaServic
 	@Override
 	public CrudDAO<Aula> getDAO() {
 		return dao;
-	}
-
-	@Override
-	public Aula get(Integer id) {
-		return dao.get(id);
 	}
 
 	@Override

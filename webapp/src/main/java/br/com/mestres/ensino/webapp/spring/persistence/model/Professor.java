@@ -8,11 +8,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,9 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "professor", catalog = "mestresensino")
-public class Professor implements java.io.Serializable {
+public class Professor extends BaseEntity{
 
-	private Integer id;
 	private String nome;
 	private String email;
 	private String telefone;
@@ -49,17 +43,6 @@ public class Professor implements java.io.Serializable {
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.aulas = aulas;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Column(name = "nome", nullable = false)

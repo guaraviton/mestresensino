@@ -45,7 +45,7 @@ public class AlunoController {
 	@ResponseBody
     public Integer incluirHoras(@PathVariable Integer idAluno,@RequestParam(required=false) Integer quantidade) {
 		Aluno aluno = alunoService.get(idAluno);
-		AlunoHora alunoHora = new AlunoHora(aluno, quantidade, Calendar.getInstance().getTime());
+		AlunoHora alunoHora = new AlunoHora(aluno, quantidade);
 		alunoHoraService.salvar(alunoHora);
 		return alunoHoraService.getHorasDisponiveis(idAluno);
     }
@@ -93,7 +93,7 @@ public class AlunoController {
 		}
 		
 		if(form.getId() == null && form.getQuantidadeHorasCompradas() != null){
-			AlunoHora alunoHora = new AlunoHora(aluno, form.getQuantidadeHorasCompradas(), Calendar.getInstance().getTime());
+			AlunoHora alunoHora = new AlunoHora(aluno, form.getQuantidadeHorasCompradas());
 			aluno.getAlunoHoras().add(alunoHora);
 		}
 		

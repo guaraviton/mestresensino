@@ -32,9 +32,4 @@ public class AlunoDaoImpl extends CrudDAOImpl<Aluno> implements AlunoDAO{
 		
         return (List<Aluno>) template.findByCriteria(criteria);
     }
-
-	@Override
-	public Aluno get(Integer id) {
-		return template.get(Aluno.class, id);
-	}
 }

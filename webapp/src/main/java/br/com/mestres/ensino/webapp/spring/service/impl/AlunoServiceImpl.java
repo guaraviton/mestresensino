@@ -31,11 +31,6 @@ public class AlunoServiceImpl extends CrudServiceImpl<Aluno> implements AlunoSer
 	}
 
 	@Override
-	public Aluno get(Integer id) {
-		return dao.get(id);
-	}
-
-	@Override
 	public CrudDAO<Aluno> getDAO() {
 		return dao;
 	}

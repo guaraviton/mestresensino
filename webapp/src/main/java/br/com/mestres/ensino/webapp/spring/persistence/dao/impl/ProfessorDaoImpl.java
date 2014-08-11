@@ -25,15 +25,4 @@ public class ProfessorDaoImpl extends CrudDAOImpl<Professor> implements Professo
 		
         return (List<Professor>) template.findByCriteria(criteria);
     }
-
-	@Override
-	public Professor get(Integer id) {
-		return template.get(Professor.class, id);
-	}
-
-	@Override
-	public List<Professor> get() {
-		return (List<Professor>) template.find("from Professor");
-	}
-
 }

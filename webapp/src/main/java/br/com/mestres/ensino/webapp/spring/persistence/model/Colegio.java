@@ -2,16 +2,12 @@ package br.com.mestres.ensino.webapp.spring.persistence.model;
 
 // Generated 05/08/2014 23:00:01 by Hibernate Tools 4.0.0
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,9 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 @Table(name = "colegio", catalog = "mestresensino")
-public class Colegio implements java.io.Serializable {
+public class Colegio extends BaseEntity{
 
-	private Integer id;
 	private String nome;
 	private String endereco;
 	
@@ -38,17 +33,6 @@ public class Colegio implements java.io.Serializable {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.alunos = alunos;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@Column(name = "nome")

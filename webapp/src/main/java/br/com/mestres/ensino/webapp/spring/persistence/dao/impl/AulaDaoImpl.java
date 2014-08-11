@@ -18,11 +18,6 @@ import br.com.mestres.ensino.webapp.spring.util.AppDateUtils;
 public class AulaDaoImpl extends CrudDAOImpl<Aula> implements AulaDAO{
 	
 	@Override
-	public Aula get(Integer id) {
-		return template.get(Aula.class, id);
-	}
-
-	@Override
 	public List<Aula> get(Integer idProfessor, Integer idSala) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Aula.class);
 		

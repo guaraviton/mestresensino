@@ -1,28 +1,66 @@
 package br.com.mestres.ensino.webapp.spring.persistence.dao.helper;
 
-import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Calendar;
+import java.util.List;
 
-public abstract class CrudDAOImpl<T extends Serializable> extends DAO{
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 
+import br.com.mestres.ensino.webapp.spring.domain.Status;
+import br.com.mestres.ensino.webapp.spring.exception.AppException;
+import br.com.mestres.ensino.webapp.spring.persistence.dao.CrudDAO;
+import br.com.mestres.ensino.webapp.spring.persistence.model.BaseEntity;
+
+public abstract class CrudDAOImpl<T extends BaseEntity> extends DAO implements CrudDAO<T>{
+
+	private Class<? extends BaseEntity> entityClass = null;
+	
+	@SuppressWarnings("unchecked") 
+	public CrudDAOImpl() {
+		Type builderClass = this.getClass().getGenericSuperclass();
+		Type tType = ((ParameterizedType)builderClass).getActualTypeArguments()[0];
+		String className = tType.toString().split(" ")[1];
+		try {
+			entityClass = (Class<? extends BaseEntity>) Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			throw new AppException("Erro ao definir classe " + entityClass.getClass().getName());
+		}
+    }
+	
+	private static String usuario = "teste";
+	
+	@Override
 	public void salvar(T entidade){
+		if(entidade.getId() == null){
+			entidade.setDataInclusao(Calendar.getInstance().getTime());
+			entidade.setUsuarioInclusao(usuario);
+		}
+		entidade.setDataUltimaAtualizacao(Calendar.getInstance().getTime());
+		entidade.setUsuarioUltimaAtualizacao(usuario);
+		
 		template.saveOrUpdate(entidade);
 	}
 	
+	@Override
 	public void excluir(T entidade){
+		entidade.setStatus(Status.EXCLUIDO.getCodigo());
 		template.delete(entidade);
 	}
 	
-	/*public List<T> get() {
-		
-		DetachedCriteria criteria = DetachedCriteria.forClass(T.);
-		
+	@SuppressWarnings("unchecked") 
+	@Override
+	public List<T> get() {
+		DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
         return (List<T>) template.findByCriteria(criteria);
-    }*/
+    }
 	
-	/*public List<T> get(Serializable id) {
-	
-	DetachedCriteria criteria = DetachedCriteria.forClass(T.);
-	
-    return (List<T>) template.findByCriteria(criteria);
-}*/
+	@SuppressWarnings("unchecked") 
+	@Override
+	public T get(Integer id) {
+		DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
+		criteria.add(Restrictions.eq("id", id));
+	    return (T) template.findByCriteria(criteria);
+	}
 }

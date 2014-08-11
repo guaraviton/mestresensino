@@ -22,19 +22,6 @@ public class ProfessorServiceImpl extends CrudServiceImpl<Professor> implements 
 		return dao.get(nome);
 	}
 
-
-	@Override
-	public Professor get(Integer id) {
-		return dao.get(id);
-	}
-
-
-	@Override
-	public List<Professor> get() {
-		return dao.get();
-	}
-
-
 	@Override
 	public CrudDAO<Professor> getDAO() {
 		return dao;

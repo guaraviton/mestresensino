@@ -2,8 +2,6 @@ package br.com.mestres.ensino.webapp.spring.persistence.model;
 
 // Generated 05/08/2014 23:00:01 by Hibernate Tools 4.0.0
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,9 +25,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @Entity
 @Table(name = "aluno", catalog = "mestresensino")
-public class Aluno implements java.io.Serializable {
+public class Aluno extends BaseEntity {
 
-	private Integer id;
 	private Colegio colegio;
 	private String nome;
 	private String nomePai;
@@ -56,7 +51,7 @@ public class Aluno implements java.io.Serializable {
 	}
 	
 	public Aluno(Integer id) {
-		this.id = id;
+		setId(id);
 	}
 
 	public Aluno(String nome, Date dataNascimento, String sexo) {
@@ -81,17 +76,6 @@ public class Aluno implements java.io.Serializable {
 		this.cep = cep;
 		this.alunoAulas = alunoAulas;
 		this.alunoHoras = alunoHoras;
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)

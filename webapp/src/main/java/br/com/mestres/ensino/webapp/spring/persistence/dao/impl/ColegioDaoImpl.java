@@ -16,16 +16,6 @@ import br.com.mestres.ensino.webapp.spring.util.AppStringUtils;
 public class ColegioDaoImpl extends CrudDAOImpl<Colegio> implements ColegioDAO{
 	
 	@Override
-	public List<Colegio> get() {
-		return (List<Colegio>) template.find("from Colegio");
-	}
-
-	@Override
-	public Colegio get(Integer id) {
-		return template.get(Colegio.class, id);
-	}
-
-	@Override
 	public List<Colegio> get(String nome) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(Colegio.class);
 		

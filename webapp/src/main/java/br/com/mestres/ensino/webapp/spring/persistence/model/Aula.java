@@ -2,8 +2,6 @@ package br.com.mestres.ensino.webapp.spring.persistence.model;
 
 // Generated 05/08/2014 23:00:01 by Hibernate Tools 4.0.0
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,17 +10,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.SortComparator;
-
 import br.com.mestres.ensino.webapp.spring.config.json.serializer.CustomDateSerializer;
-import br.com.mestres.ensino.webapp.spring.util.comparator.AlunoAulaComparator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -32,9 +25,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @Entity
 @Table(name = "aula", catalog = "mestresensino")
-public class Aula implements java.io.Serializable {
+public class Aula extends BaseEntity{
 
-	private Integer id;
 	private Sala sala;
 	private Professor professor;
 	
@@ -47,17 +39,6 @@ public class Aula implements java.io.Serializable {
 	private Set<AlunoAula> alunoAulas = new HashSet<AlunoAula>(0);
 
 	public Aula() {
-	}
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
