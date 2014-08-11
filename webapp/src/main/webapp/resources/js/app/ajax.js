@@ -115,7 +115,7 @@ var defaultBeforeSendFunction = function(jqXHR, settings){
 	}
 	app.dialog(optionsDialog);
 	$('.errorblock').remove();
-	//$("input").removeClass("error");
+	$("input").removeClass("error");
 }
 
 var defaultSucessFunction = function(data, textStatus, jqXHR, setId, tipoSubmit){
@@ -185,7 +185,7 @@ var tratarMensagensValidacao = function(jqXHR){
 				 app.dialog(optionsDialog);
 			 }else if ($("#mensagemErro_"+value.field).length <= 0){
 				 campo.parent().after('<span class="errorblock" id="mensagemErro_'+value.field+'">'+value.message+'</span>')
-				 //campo.addClass("error");
+				 campo.addClass("error");
 			 }
 			 
 		});

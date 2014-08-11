@@ -1,5 +1,6 @@
 package br.com.mestres.ensino.webapp.spring.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,56 @@ public class AulaServiceImpl extends CrudServiceImpl<Aula> implements AulaServic
 		
 		verificarHorasDisponiveisAluno(aula);
 		
+		verificarDisponibilidadeProfessor(aula);
+		
+		verificarDisponibilidadeSala(aula);
+		
+		verificarDisponibilidadeAluno(aula);
+		
 		super.salvar(aula);
+	}
+
+	private void verificarDisponibilidadeAluno(Aula aula) {
+		StringBuilder sb = new StringBuilder("");
+		boolean plural = false;
+		int i = 1;
+		for(AlunoAula alunoAula : aula.getAlunoAulas()){
+			if(!isHorarioIndisponivel(aula.getId(), alunoAula.getAluno().getId(), null, null, aula.getData(), aula.getHorario(), aula.getHoras())){
+				if(!sb.toString().equals("")){
+					plural = true;
+					if(i == aula.getAlunoAulas().size()){
+						sb.append(" " + AppMessageUtils.get("label.e") + " ");
+					}else{
+						sb.append(", ");
+					}
+				}
+				
+				sb.append(alunoAula.getAluno().getNome());
+				
+				i++;
+			}
+		}
+		if(!sb.toString().equals("")){
+			String key;
+			if(plural){
+				key = "alunos.nao.possuem.disponibilidade";
+			}else{
+				key = "aluno.nao.possui.disponibilidade";
+			}
+			throw new AppBusinessException(AppMessageUtils.get(key, sb.toString()));
+		}
+	}
+	
+	private void verificarDisponibilidadeProfessor(Aula aula) {
+		if(!isHorarioIndisponivel(aula.getId(), null, aula.getProfessor().getId(), null, aula.getData(), aula.getHorario(), aula.getHoras())){
+			throw new AppBusinessException(AppMessageUtils.get("professor.nao.possui.disponibilidade"));
+		}
+	}
+	
+	private void verificarDisponibilidadeSala(Aula aula) {
+		if(!isHorarioIndisponivel(aula.getId(), null, null, aula.getSala().getId(), aula.getData(), aula.getHorario(), aula.getHoras())){
+			throw new AppBusinessException(AppMessageUtils.get("sala.nao.possui.disponibilidade"));
+		}
 	}
 
 	private void verificarHorasDisponiveisAluno(Aula aula) {
@@ -93,5 +143,11 @@ public class AulaServiceImpl extends CrudServiceImpl<Aula> implements AulaServic
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean isHorarioIndisponivel(Integer idAula, Integer idAluno,
+			Integer idProfessor, Integer idSala, Date dataAula, String horarioAula, Integer horas) {
+		return dao.isHorarioIndisponivel(idAula, idAluno, idProfessor, idSala, dataAula, horarioAula, horas);
 	}
 }

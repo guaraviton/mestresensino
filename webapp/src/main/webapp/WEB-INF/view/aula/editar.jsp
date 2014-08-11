@@ -71,7 +71,7 @@
 		
 		<div class="formspacer">
 			<div class="bloco">
-				<label for="data"><spring:message code="label.horas" /></label> 
+				<label for="horas"><spring:message code="label.horas" /></label> 
 				<input type="text" id="horas" name="horas" style="width: 35px" value="${aula.horas}">
 			</div>
 		</div>

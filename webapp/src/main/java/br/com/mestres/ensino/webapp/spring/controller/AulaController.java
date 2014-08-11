@@ -85,6 +85,7 @@ public class AulaController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
     public Integer salvar(@Valid @RequestBody AulaForm form) {
+		
 		Aula aula;
 		if(form.getId() != null){
 			aula = aulaService.get(form.getId());
@@ -114,7 +115,8 @@ public class AulaController {
 					idEntidadeAlunoAula = Integer.parseInt(idAlunoAula[1].toString());
 				}
 				
-				AlunoAula alunoAula = new AlunoAula(new Aluno(idEntidadeAluno), aula);
+				Aluno aluno = alunoService.get(idEntidadeAluno);
+				AlunoAula alunoAula = new AlunoAula(aluno, aula);
 				alunoAula.setId(idEntidadeAlunoAula);
 				aula.getAlunoAulas().add(alunoAula);
 			}
