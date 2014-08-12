@@ -8,7 +8,7 @@ import java.util.List;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
-import br.com.mestres.ensino.webapp.spring.domain.Status;
+import br.com.mestres.ensino.webapp.spring.domain.StatusRegistro;
 import br.com.mestres.ensino.webapp.spring.exception.AppException;
 import br.com.mestres.ensino.webapp.spring.persistence.dao.CrudDAO;
 import br.com.mestres.ensino.webapp.spring.persistence.model.BaseEntity;
@@ -29,13 +29,14 @@ public abstract class CrudDAOImpl<T extends BaseEntity> extends DAO implements C
 		}
     }
 	
-	private static String usuario = "teste";
+	public static String usuario = "teste";
 	
 	@Override
 	public void salvar(T entidade){
 		if(entidade.getId() == null){
 			entidade.setDataInclusao(Calendar.getInstance().getTime());
 			entidade.setUsuarioInclusao(usuario);
+			entidade.setStatusRegistro(StatusRegistro.ATIVO.getCodigo());
 		}
 		entidade.setDataUltimaAtualizacao(Calendar.getInstance().getTime());
 		entidade.setUsuarioUltimaAtualizacao(usuario);
@@ -45,7 +46,7 @@ public abstract class CrudDAOImpl<T extends BaseEntity> extends DAO implements C
 	
 	@Override
 	public void excluir(T entidade){
-		entidade.setStatus(Status.EXCLUIDO.getCodigo());
+		//entidade.setStatusRegistro(StatusRegistro.EXCLUIDO.getCodigo());
 		template.delete(entidade);
 	}
 	
@@ -61,6 +62,7 @@ public abstract class CrudDAOImpl<T extends BaseEntity> extends DAO implements C
 	public T get(Integer id) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(entityClass);
 		criteria.add(Restrictions.eq("id", id));
-	    return (T) template.findByCriteria(criteria);
+		List<T> retorno = (List<T>) template.findByCriteria(criteria);
+	    return retorno.isEmpty() ? null : retorno.get(0);
 	}
 }

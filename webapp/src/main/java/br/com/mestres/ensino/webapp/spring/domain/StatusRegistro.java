@@ -1,11 +1,12 @@
 package br.com.mestres.ensino.webapp.spring.domain;
 
-public enum Status {
+public enum StatusRegistro {
 	
 	ATIVO("A"), EXCLUIDO("E");
 	
 	String codigo;
-    private Status(final String codigo) {
+	
+    private StatusRegistro(final String codigo) {
     	this.codigo = codigo;
     }
     

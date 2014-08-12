@@ -8,78 +8,82 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@MappedSuperclass
 public class BaseEntity implements Serializable {
 	
+	private Integer id;
+	
+	private Date dataInclusao;
+	
+	private String usuarioInclusao;
+	
+	private Date dataUltimaAtualizacao;
+	
+	private String usuarioUltimaAtualizacao;
+	
+	private String statusRegistro;
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private Integer id;
+	public Integer getId() {
+		return this.id;
+	}
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_inclusao", nullable = false, length = 19)
-	private Date dataInclusao;
-	
-	@Column(name = "usuario_inclusao", nullable = false, length = 10)
-	private String usuarioInclusao;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "data_ultima_atualizacao", nullable = false, length = 19)
-	private Date dataUltimaAtualizacao;
-	
-	@Column(name = "usuario_ultima_atualizacao", nullable = false, length = 10)
-	private String usuarioUltimaAtualizacao;
-	
-	@Column(name = "status", nullable = false, length = 1)
-	private String status;
-
-	public Date getDataInclusao(){
-		return dataInclusao;
+	public Date getDataInclusao() {
+		return this.dataInclusao;
 	}
 
-	public void setDataInclusao(Date dataInclusao){
+	public void setDataInclusao(Date dataInclusao) {
 		this.dataInclusao = dataInclusao;
 	}
 
-	public String getUsuarioInclusao(){
-		return usuarioInclusao;
+	@Column(name = "usuario_inclusao", nullable = false, length = 10)
+	public String getUsuarioInclusao() {
+		return this.usuarioInclusao;
 	}
 
-	public void setUsuarioInclusao(String usuarioInclusao){
+	public void setUsuarioInclusao(String usuarioInclusao) {
 		this.usuarioInclusao = usuarioInclusao;
 	}
 
-	public Date getDataUltimaAtualizacao(){
-		return dataUltimaAtualizacao;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_ultima_atualizacao", nullable = false, length = 19)
+	public Date getDataUltimaAtualizacao() {
+		return this.dataUltimaAtualizacao;
 	}
 
-	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao){
+	public void setDataUltimaAtualizacao(Date dataUltimaAtualizacao) {
 		this.dataUltimaAtualizacao = dataUltimaAtualizacao;
 	}
 
-	public String getUsuarioUltimaAtualizacao(){
-		return usuarioUltimaAtualizacao;
+	@Column(name = "usuario_ultima_atualizacao", nullable = false, length = 10)
+	public String getUsuarioUltimaAtualizacao() {
+		return this.usuarioUltimaAtualizacao;
 	}
 
-	public void setUsuarioUltimaAtualizacao(String usuarioUltimaAtualizacao){
+	public void setUsuarioUltimaAtualizacao(String usuarioUltimaAtualizacao) {
 		this.usuarioUltimaAtualizacao = usuarioUltimaAtualizacao;
 	}
 
-	public String getStatus(){
-		return status;
+	@Column(name = "status_registro", nullable = false, length = 1)
+	public String getStatusRegistro() {
+		return this.statusRegistro;
 	}
 
-	public void setStatus(String status){
-		this.status = status;
+	public void setStatusRegistro(String statusRegistro) {
+		this.statusRegistro = statusRegistro;
 	}
 
-	public Integer getId(){
-		return id;
-	}
-
-	public void setId(Integer id){
+	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	
 }

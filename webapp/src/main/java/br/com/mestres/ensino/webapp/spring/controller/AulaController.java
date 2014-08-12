@@ -1,5 +1,7 @@
 package br.com.mestres.ensino.webapp.spring.controller;
 
+import java.util.Calendar;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.com.mestres.ensino.webapp.spring.domain.StatusRegistro;
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
+import br.com.mestres.ensino.webapp.spring.persistence.dao.helper.CrudDAOImpl;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
 import br.com.mestres.ensino.webapp.spring.persistence.model.AlunoAula;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Aula;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Professor;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Sala;
+import br.com.mestres.ensino.webapp.spring.service.AlunoAulaService;
 import br.com.mestres.ensino.webapp.spring.service.AlunoService;
 import br.com.mestres.ensino.webapp.spring.service.AulaService;
 import br.com.mestres.ensino.webapp.spring.service.ProfessorService;
@@ -40,6 +45,9 @@ public class AulaController {
 	
 	@Autowired
 	AulaService aulaService;
+	
+	@Autowired
+	AlunoAulaService alunoAulaService;
 	
 	@RequestMapping(value="/editar.html",method = RequestMethod.GET)
     public String editar(Model model) {
@@ -85,11 +93,8 @@ public class AulaController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
     public Integer salvar(@Valid @RequestBody AulaForm form) {
-		
-		Aula aula;
-		if(form.getId() != null){
-			aula = aulaService.get(form.getId());
-		}else{
+		Aula aula = aulaService.get(form.getId());
+		if(aula == null){
 			aula = new Aula();
 		}
 		
@@ -116,8 +121,18 @@ public class AulaController {
 				}
 				
 				Aluno aluno = alunoService.get(idEntidadeAluno);
-				AlunoAula alunoAula = new AlunoAula(aluno, aula);
-				alunoAula.setId(idEntidadeAlunoAula);
+				AlunoAula alunoAula = alunoAulaService.get(idEntidadeAlunoAula);
+				if(alunoAula == null){
+					alunoAula = new AlunoAula();
+					alunoAula.setDataInclusao(Calendar.getInstance().getTime());
+					alunoAula.setUsuarioInclusao(CrudDAOImpl.usuario);
+					alunoAula.setStatusRegistro(StatusRegistro.ATIVO.getCodigo());
+				}
+				alunoAula.setDataUltimaAtualizacao(Calendar.getInstance().getTime());
+				alunoAula.setUsuarioUltimaAtualizacao(CrudDAOImpl.usuario);
+				
+				alunoAula.setAluno(aluno);
+				alunoAula.setAula(aula);
 				aula.getAlunoAulas().add(alunoAula);
 			}
 		}

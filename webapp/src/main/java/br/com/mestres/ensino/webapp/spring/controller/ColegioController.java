@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.mestres.ensino.webapp.spring.dto.DataTableWrapperDTO;
-import br.com.mestres.ensino.webapp.spring.persistence.model.Aluno;
+import br.com.mestres.ensino.webapp.spring.persistence.model.Aula;
 import br.com.mestres.ensino.webapp.spring.persistence.model.Colegio;
 import br.com.mestres.ensino.webapp.spring.service.ColegioService;
 import br.com.mestres.ensino.webapp.spring.util.AppBeanProperties;
-import br.com.mestres.ensino.webapp.spring.view.form.AlunoForm;
 import br.com.mestres.ensino.webapp.spring.view.form.ColegioForm;
 
 @Controller
@@ -53,7 +52,10 @@ public class ColegioController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
     public Integer salvar(@Valid @RequestBody ColegioForm form) {
-		Colegio colegio = new Colegio();
+		Colegio colegio = colegioService.get(form.getId());
+		if(colegio == null){
+			colegio = new Colegio();
+		}
 		AppBeanProperties.copyProperties(colegio, form);
 		colegioService.salvar(colegio);
 		return colegio.getId();

@@ -1,7 +1,5 @@
 package br.com.mestres.ensino.webapp.spring.controller;
 
-import java.util.Calendar;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +79,10 @@ public class AlunoController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
     public Integer salvar(@Valid @RequestBody AlunoForm form) {
-		Aluno aluno = new Aluno();
+		Aluno aluno = alunoService.get(form.getId());
+		if(aluno == null){
+			aluno = new Aluno();
+		}
 		AppBeanProperties.copyProperties(aluno, form);
 		
 		if(form.getIdColegio() == null){

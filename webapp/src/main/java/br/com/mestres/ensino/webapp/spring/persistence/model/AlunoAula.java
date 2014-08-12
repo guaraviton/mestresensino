@@ -26,10 +26,6 @@ public class AlunoAula extends BaseEntity {
 		this.aula = aula;
 	}
 
-	public void setId(Integer id) {
-		setId(id);
-	}
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "aluno_id", nullable = false)
 	public Aluno getAluno() {
