@@ -68,7 +68,8 @@
 		<div class="formspacer">
 			<div class="bloco">
 				<div id="sexo">
-					<label>Sexo</label> <label class="radiocheck">
+					<label>Sexo</label> 
+					<label class="radiocheck">
 						<input type="radio" name="sexo" value="F" ${aluno.sexo == 'F' ? 'checked' : ''} tabindex="9"> 
 						<spring:message code="label.feminino" />
 					</label> 

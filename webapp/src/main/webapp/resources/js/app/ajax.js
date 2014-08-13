@@ -184,8 +184,10 @@ var tratarMensagensValidacao = function(jqXHR){
 				 
 				 app.dialog(optionsDialog);
 			 }else if ($("#mensagemErro_"+value.field).length <= 0){
-				 campo.parent().after('<span class="errorblock" id="mensagemErro_'+value.field+'">'+value.message+'</span>')
-				 campo.addClass("error");
+				 campo.parent().after('<span class="errorblock" id="mensagemErro_'+value.field+'">'+value.message+'</span>');
+				 if(!campo.is('div')){
+					 campo.addClass("error");
+				 }
 			 }
 			 
 		});
